@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+
+# Scripts
+serve.sh
+
+# Docker files (no need to copy these into the image)
+Dockerfile
+compose.yaml
+.dockerignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

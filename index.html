@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenSentry - Privacy-First Security Camera System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-shield-lock-fill"></i> OpenSentry
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#documentation">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#community">Community</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <h1 class="display-3 fw-bold mb-4">Privacy-First Security Camera System</h1>
+                    <p class="lead mb-4">Transform any Linux device into a powerful motion detection security camera. Self-hosted, open-source, and completely under your control.</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#features" class="btn btn-primary btn-lg">
+                            <i class="bi bi-play-circle-fill me-2"></i>Explore Features
+                        </a>
+                        <a href="https://github.com/Sbussiso/OpenSentry-LVM" target="_blank" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-github me-2"></i>View on GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="bi bi-camera-video-fill hero-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="display-4 fw-bold">What is OpenSentry?</h2>
+                    <p class="lead text-muted">A complete ecosystem for self-hosted security camera systems</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-camera-video text-primary fs-1 me-3"></i>
+                                <h3 class="mb-0">OpenSentry - LMV</h3>
+                            </div>
+                            <p class="text-muted mb-3"><strong>Live Motion Version</strong></p>
+                            <p>Turn any Linux device with a camera into a motion detection security system you control. All processing happens locally on your hardware - no cloud services required.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Real-time video streaming</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Motion detection with overlays</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Automatic snapshot capture</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Works on Raspberry Pi & more</li>
+                            </ul>
+                            <a href="https://github.com/Sbussiso/OpenSentry-LVM" target="_blank" class="btn btn-primary">
+                                <i class="bi bi-github me-2"></i>View Repository
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-grid-3x3-gap text-primary fs-1 me-3"></i>
+                                <h3 class="mb-0">OpenSentry Command</h3>
+                            </div>
+                            <p class="text-muted mb-3"><strong>Central Management Hub</strong></p>
+                            <p>A lightweight, modern web UI for discovering and managing multiple OpenSentry devices across your network. One dashboard to control them all.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Automatic device discovery</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Multi-device management</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>OAuth2/OIDC integration</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>REST API for automation</li>
+                            </ul>
+                            <a href="https://github.com/Sbussiso/OpenSentry-Command" target="_blank" class="btn btn-primary">
+                                <i class="bi bi-github me-2"></i>View Repository
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12 text-center">
+                    <h2 class="display-4 fw-bold">Features</h2>
+                    <p class="lead text-muted">Everything you need for a complete security camera solution</p>
+                </div>
+            </div>
+
+            <!-- Core Features -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <i class="bi bi-lock-fill feature-icon text-primary"></i>
+                        <h4>Privacy First</h4>
+                        <p class="text-muted">All processing happens locally on your hardware. No cloud services, no data collection, complete control.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <i class="bi bi-cpu-fill feature-icon text-primary"></i>
+                        <h4>Motion Detection</h4>
+                        <p class="text-muted">Advanced motion detection using OpenCV with configurable sensitivity and real-time visual overlays.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <i class="bi bi-broadcast feature-icon text-primary"></i>
+                        <h4>Live Streaming</h4>
+                        <p class="text-muted">Real-time MJPEG video streaming to web browsers with support for multiple simultaneous viewers.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <i class="bi bi-camera-fill feature-icon text-primary"></i>
+                        <h4>Automatic Snapshots</h4>
+                        <p class="text-muted">Capture snapshots automatically when motion is detected or manually via the web interface.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <i class="bi bi-search feature-icon text-primary"></i>
+                        <h4>Device Discovery</h4>
+                        <p class="text-muted">Automatic network discovery via mDNS with fallback TCP/IP subnet scanning.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <i class="bi bi-shield-check feature-icon text-primary"></i>
+                        <h4>Flexible Authentication</h4>
+                        <p class="text-muted">Choose between local authentication or integrate with OAuth2/OIDC providers for enterprise SSO.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Features -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="mb-4 text-center">Technical Highlights</h3>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-gear-fill text-primary me-2"></i>
+                        <strong>Low Resource Usage</strong>
+                        <p class="text-muted mb-0 small">Optimized for Raspberry Pi and ARM devices</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-box-seam text-primary me-2"></i>
+                        <strong>Docker Ready</strong>
+                        <p class="text-muted mb-0 small">Complete Docker & Docker Compose support</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-code-slash text-primary me-2"></i>
+                        <strong>REST API</strong>
+                        <p class="text-muted mb-0 small">Full REST API for automation and integration</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-phone text-primary me-2"></i>
+                        <strong>Responsive Design</strong>
+                        <p class="text-muted mb-0 small">Mobile-friendly web interface</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-lightning-charge-fill text-primary me-2"></i>
+                        <strong>Hardware Acceleration</strong>
+                        <p class="text-muted mb-0 small">TurboJPEG support for fast encoding</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-people-fill text-primary me-2"></i>
+                        <strong>Multi-Client</strong>
+                        <p class="text-muted mb-0 small">Handle multiple viewers simultaneously</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-journal-text text-primary me-2"></i>
+                        <strong>Comprehensive Logging</strong>
+                        <p class="text-muted mb-0 small">Ring buffer in-memory logs for debugging</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="tech-feature">
+                        <i class="bi bi-file-earmark-code text-primary me-2"></i>
+                        <strong>MIT Licensed</strong>
+                        <p class="text-muted mb-0 small">Open source and free to use</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12 text-center">
+                    <h2 class="display-4 fw-bold">Documentation</h2>
+                    <p class="lead text-muted">Get started with OpenSentry in minutes</p>
+                </div>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4"><i class="bi bi-rocket-takeoff-fill text-primary me-2"></i>Quick Start</h3>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <h5>OpenSentry - LMV</h5>
+                                    <p class="text-muted">Run on your camera device (Raspberry Pi, etc.)</p>
+
+                                    <h6 class="mt-3">Using Docker Compose (Recommended)</h6>
+                                    <pre class="bg-dark text-light p-3 rounded"><code>git clone https://github.com/Sbussiso/OpenSentry-LVM.git
+cd OpenSentry-LVM
+docker compose up -d</code></pre>
+
+                                    <h6 class="mt-3">From Source</h6>
+                                    <pre class="bg-dark text-light p-3 rounded"><code>git clone https://github.com/Sbussiso/OpenSentry-LVM.git
+cd OpenSentry-LVM
+uv run server.py</code></pre>
+
+                                    <p class="mt-3">Access the web interface at <code>http://&lt;device-ip&gt;:5000</code></p>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <h5>OpenSentry Command</h5>
+                                    <p class="text-muted">Run on your central management device</p>
+
+                                    <h6 class="mt-3">Using Docker Compose (Recommended)</h6>
+                                    <pre class="bg-dark text-light p-3 rounded"><code>git clone https://github.com/Sbussiso/OpenSentry-Command.git
+cd OpenSentry-Command
+docker compose up -d</code></pre>
+
+                                    <h6 class="mt-3">From Source</h6>
+                                    <pre class="bg-dark text-light p-3 rounded"><code>git clone https://github.com/Sbussiso/OpenSentry-Command.git
+cd OpenSentry-Command
+uv run main.py</code></pre>
+
+                                    <p class="mt-3">Access the dashboard at <code>http://&lt;device-ip&gt;:5000</code></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hardware Requirements -->
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4"><i class="bi bi-laptop text-primary me-2"></i>Hardware Requirements</h3>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Device</th>
+                                            <th>Performance</th>
+                                            <th>Recommended Use</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Raspberry Pi Zero 2 W</strong></td>
+                                            <td><span class="badge bg-warning">Low FPS</span></td>
+                                            <td>Basic monitoring, low traffic areas</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Raspberry Pi 3</strong></td>
+                                            <td><span class="badge bg-info">Moderate</span></td>
+                                            <td>Standard home security</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Raspberry Pi 4/5</strong></td>
+                                            <td><span class="badge bg-success">Good</span></td>
+                                            <td>Smooth streaming, multiple clients</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Intel NUC / Desktop</strong></td>
+                                            <td><span class="badge bg-success">Excellent</span></td>
+                                            <td>High-performance, multiple cameras</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="alert alert-info mt-3">
+                                <i class="bi bi-info-circle-fill me-2"></i>
+                                <strong>Camera Requirements:</strong> Any V4L2-compatible camera (USB webcams, Raspberry Pi Camera Module, etc.)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4"><i class="bi bi-sliders text-primary me-2"></i>Configuration</h3>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Motion Detection Settings</h5>
+                                    <p class="text-muted">Adjust sensitivity via the web settings page or <code>config.json</code>:</p>
+                                    <ul>
+                                        <li><strong>Sensitivity:</strong> Detection threshold (lower = more sensitive)</li>
+                                        <li><strong>Min Area:</strong> Minimum motion area to trigger detection</li>
+                                        <li><strong>Cooldown:</strong> Time between automatic snapshots</li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h5>Authentication Modes</h5>
+                                    <p class="text-muted">Choose your authentication method:</p>
+                                    <ul>
+                                        <li><strong>Local:</strong> Username/password (default: admin/admin)</li>
+                                        <li><strong>OAuth2/OIDC:</strong> Integrate with Keycloak, Auth0, Okta, Google, etc.</li>
+                                        <li><strong>None:</strong> Public access (not recommended for production)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4"><i class="bi bi-lightbulb text-primary me-2"></i>Use Cases</h3>
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="use-case-card p-3 border rounded">
+                                        <h5><i class="bi bi-house-door-fill text-primary me-2"></i>Home Security</h5>
+                                        <p class="text-muted small mb-0">Monitor entrances, windows, and perimeter areas with motion-triggered alerts</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="use-case-card p-3 border rounded">
+                                        <h5><i class="bi bi-tree-fill text-primary me-2"></i>Wildlife Observation</h5>
+                                        <p class="text-muted small mb-0">Capture wildlife activity with automatic motion-triggered snapshots</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="use-case-card p-3 border rounded">
+                                        <h5><i class="bi bi-building text-primary me-2"></i>Small Office</h5>
+                                        <p class="text-muted small mb-0">Monitor office spaces with centralized management and OAuth2 integration</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="use-case-card p-3 border rounded">
+                                        <h5><i class="bi bi-signpost-split-fill text-primary me-2"></i>Perimeter Monitoring</h5>
+                                        <p class="text-muted small mb-0">Deploy multiple cameras around property boundaries with unified dashboard</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="use-case-card p-3 border rounded">
+                                        <h5><i class="bi bi-car-front-fill text-primary me-2"></i>Parking/Garage</h5>
+                                        <p class="text-muted small mb-0">Track vehicle activity and detect unexpected movement in parking areas</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="use-case-card p-3 border rounded">
+                                        <h5><i class="bi bi-diagram-3-fill text-primary me-2"></i>Smart Home Integration</h5>
+                                        <p class="text-muted small mb-0">Integrate with home automation systems via REST API</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12 text-center">
+                    <h2 class="display-4 fw-bold">Community & Support</h2>
+                    <p class="lead text-muted">Join the OpenSentry community</p>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4 text-center">
+                            <i class="bi bi-github display-4 text-primary mb-3"></i>
+                            <h4>OpenSentry - LMV</h4>
+                            <p class="text-muted">Motion detection camera system</p>
+                            <a href="https://github.com/Sbussiso/OpenSentry-LVM" target="_blank" class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-github me-2"></i>View Repository
+                            </a>
+                            <div class="mt-3">
+                                <a href="https://github.com/Sbussiso/OpenSentry-LVM/issues" target="_blank" class="btn btn-sm btn-outline-secondary me-2">
+                                    <i class="bi bi-bug-fill me-1"></i>Report Issues
+                                </a>
+                                <a href="https://github.com/Sbussiso/OpenSentry-LVM/pulls" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-code-slash me-1"></i>Pull Requests
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4 text-center">
+                            <i class="bi bi-github display-4 text-primary mb-3"></i>
+                            <h4>OpenSentry Command</h4>
+                            <p class="text-muted">Central management hub</p>
+                            <a href="https://github.com/Sbussiso/OpenSentry-Command" target="_blank" class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-github me-2"></i>View Repository
+                            </a>
+                            <div class="mt-3">
+                                <a href="https://github.com/Sbussiso/OpenSentry-Command/issues" target="_blank" class="btn btn-sm btn-outline-secondary me-2">
+                                    <i class="bi bi-bug-fill me-1"></i>Report Issues
+                                </a>
+                                <a href="https://github.com/Sbussiso/OpenSentry-Command/pulls" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-code-slash me-1"></i>Pull Requests
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contributing -->
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <div class="card shadow-sm border-0 bg-primary text-white">
+                        <div class="card-body p-4">
+                            <h3 class="mb-3"><i class="bi bi-heart-fill me-2"></i>Contributing</h3>
+                            <p class="mb-3">OpenSentry is open source and welcomes contributions! Whether you're fixing bugs, adding features, improving documentation, or sharing feedback, your input is valuable.</p>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <a href="https://github.com/Sbussiso/OpenSentry-LVM/fork" target="_blank" class="btn btn-light">
+                                    <i class="bi bi-git me-2"></i>Fork OpenSentry LMV
+                                </a>
+                                <a href="https://github.com/Sbussiso/OpenSentry-Command/fork" target="_blank" class="btn btn-light">
+                                    <i class="bi bi-git me-2"></i>Fork OpenSentry Command
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4 text-center"><i class="bi bi-stack text-primary me-2"></i>Technology Stack</h3>
+                            <div class="row text-center">
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-python display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">Python 3.12+</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-cup-hot-fill display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">Flask</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-eye-fill display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">OpenCV</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-box-seam display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">Docker</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-broadcast display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">MJPEG Streaming</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-router-fill display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">mDNS/Zeroconf</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-shield-check display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">OAuth2/OIDC</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="tech-badge">
+                                        <i class="bi bi-file-earmark-code display-6 text-primary"></i>
+                                        <p class="mt-2 mb-0 fw-bold">REST API</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-shield-lock-fill me-2"></i>OpenSentry</h5>
+                    <p class="text-muted">Privacy-first, self-hosted security camera system</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-2">Licensed under MIT</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Sbussiso/OpenSentry-LVM" target="_blank" class="text-white me-3">
+                            <i class="bi bi-github fs-4"></i>
+                        </a>
+                        <a href="https://github.com/Sbussiso/OpenSentry-Command" target="_blank" class="text-white">
+                            <i class="bi bi-github fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3 bg-secondary">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="text-muted mb-0">&copy; 2024 OpenSentry. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
