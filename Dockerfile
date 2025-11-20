@@ -10,6 +10,7 @@ WORKDIR /app
 COPY index.html .
 COPY css/ ./css/
 COPY js/ ./js/
+COPY ["Opensentry website vid.mp4", "."]
 
 # Expose port 8000
 EXPOSE 8000
