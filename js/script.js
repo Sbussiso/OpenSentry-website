@@ -1,65 +1,107 @@
-// OpenSentry Website JavaScript
+// OpenSentry Website - JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('a.nav-link[href^="#"]');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    }
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+        });
+    });
+    
+    // Tab functionality for installation section
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tabId = this.dataset.tab;
+            
+            // Remove active from all buttons and panels
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanels.forEach(p => p.classList.remove('active'));
+            
+            // Add active to clicked button and corresponding panel
+            this.classList.add('active');
+            document.getElementById(`${tabId}-panel`).classList.add('active');
+        });
+    });
+    
+    // Copy to clipboard functionality
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const textToCopy = this.dataset.copy;
+            
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                const originalText = this.textContent;
+                this.textContent = 'Copied!';
+                this.style.color = 'var(--accent-green)';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.color = '';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+            }
+        });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
             e.preventDefault();
-
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                // Close mobile menu if open
-                const navbarCollapse = document.querySelector('.navbar-collapse');
-                if (navbarCollapse.classList.contains('show')) {
-                    const bsCollapse = new bootstrap.Collapse(navbarCollapse);
-                    bsCollapse.hide();
-                }
-
-                // Smooth scroll to target
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+            const target = document.querySelector(href);
+            if (target) {
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
     });
-
-    // Active navigation highlighting on scroll
-    const sections = document.querySelectorAll('section[id]');
-
-    function highlightNavigation() {
-        const scrollPosition = window.scrollY + 100;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }
-
-    window.addEventListener('scroll', highlightNavigation);
-    highlightNavigation(); // Call once on load
-
-    // Add animation on scroll
+    
+    // Navbar background on scroll
+    const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
+            navbar.style.background = 'rgba(10, 15, 26, 0.98)';
+        } else {
+            navbar.style.background = 'rgba(10, 15, 26, 0.9)';
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Animate elements on scroll
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-
-    const observer = new IntersectionObserver(function(entries) {
+    
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
@@ -67,91 +109,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, observerOptions);
-
-    // Observe cards and feature elements
-    const animatedElements = document.querySelectorAll('.card, .feature-card, .tech-feature');
-    animatedElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(element);
+    
+    // Observe feature cards and other animated elements
+    document.querySelectorAll('.feature-card, .arch-card, .doc-card, .step').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
     });
-
-    // Copy code to clipboard functionality for code blocks
-    const codeBlocks = document.querySelectorAll('pre code');
-
-    codeBlocks.forEach(block => {
-        const pre = block.parentElement;
-        const button = document.createElement('button');
-        button.className = 'btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2';
-        button.innerHTML = '<i class="bi bi-clipboard"></i>';
-        button.title = 'Copy to clipboard';
-
-        pre.style.position = 'relative';
-        pre.appendChild(button);
-
-        button.addEventListener('click', function() {
-            const code = block.textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                button.innerHTML = '<i class="bi bi-check-lg"></i>';
-                setTimeout(() => {
-                    button.innerHTML = '<i class="bi bi-clipboard"></i>';
-                }, 2000);
-            });
-        });
-    });
-
-    // Back to top button
-    const backToTopButton = document.createElement('button');
-    backToTopButton.innerHTML = '<i class="bi bi-arrow-up-short"></i>';
-    backToTopButton.className = 'btn btn-primary position-fixed bottom-0 end-0 m-4 rounded-circle';
-    backToTopButton.style.width = '50px';
-    backToTopButton.style.height = '50px';
-    backToTopButton.style.display = 'none';
-    backToTopButton.style.zIndex = '1000';
-    backToTopButton.title = 'Back to top';
-
-    document.body.appendChild(backToTopButton);
-
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            backToTopButton.style.display = 'block';
-        } else {
-            backToTopButton.style.display = 'none';
-        }
-    });
-
-    backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Navbar background change on scroll
-    const navbar = document.querySelector('.navbar');
-
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.style.backgroundColor = 'rgba(33, 37, 41, 1)';
-        } else {
-            navbar.style.backgroundColor = 'rgba(33, 37, 41, 0.95)';
-        }
-    });
-
-    // Add external link icons
-    const externalLinks = document.querySelectorAll('a[target="_blank"]');
-    externalLinks.forEach(link => {
-        if (!link.querySelector('i.bi-github') && !link.querySelector('i.bi')) {
-            const icon = document.createElement('i');
-            icon.className = 'bi bi-box-arrow-up-right ms-1';
-            icon.style.fontSize = '0.8em';
-            link.appendChild(icon);
-        }
-    });
-
-    // Console easter egg
-    console.log('%c⚡ OpenSentry ⚡', 'color: #667eea; font-size: 20px; font-weight: bold;');
-    console.log('%cPrivacy-first security camera system', 'color: #764ba2; font-size: 14px;');
-    console.log('%cGitHub: https://github.com/Sbussiso', 'color: #333; font-size: 12px;');
 });

@@ -1,13 +1,13 @@
 # OpenSentry Website
 
-A static website showcasing the OpenSentry ecosystem, including OpenSentry - LMV (Live Motion Version) and OpenSentry Command.
+The official website for OpenSentry - an open-source, self-hosted security camera system with end-to-end encryption.
 
 ## Features
 
-- **Modern Design**: Clean, professional design using Bootstrap 5
+- **Dark Theme**: Matches the OpenSentry Command Center UI
 - **Responsive**: Mobile-friendly layout that works on all devices
 - **Static HTML/CSS/JS**: No build process required, easy to deploy anywhere
-- **Comprehensive Documentation**: Includes all sections covering features, documentation, and community
+- **Accurate Documentation**: Reflects the real Command Center + Node architecture
 
 ## Quick Start with Docker (Recommended)
 
@@ -53,11 +53,12 @@ opensentry-website/
 
 ## Website Sections
 
-1. **Hero Section**: Eye-catching landing area with project overview
-2. **About Section**: Introduction to both OpenSentry projects
-3. **Features Section**: Comprehensive feature showcase
-4. **Documentation Section**: Quick start guides, hardware requirements, configuration
-5. **Community Section**: GitHub links, contribution info, tech stack
+1. **Hero**: Landing with encryption stats and dashboard preview
+2. **Features**: End-to-end encryption, local operation, auto-discovery, multi-user
+3. **Architecture**: Command Center + Node two-component design
+4. **Installation**: Step-by-step setup for both components
+5. **Documentation**: Links to GitHub READMEs
+6. **Security**: Encryption diagram and security features
 
 ## Local Development
 
@@ -175,9 +176,8 @@ The site includes several interactive features in `js/script.js`:
 ## Technologies Used
 
 - **HTML5**: Modern semantic markup
-- **CSS3**: Custom styles with animations
-- **Bootstrap 5.3.2**: Responsive framework
-- **Bootstrap Icons**: Icon library
+- **CSS3**: Custom properties, flexbox, grid, animations
+- **Google Fonts**: Inter + JetBrains Mono
 - **Vanilla JavaScript**: No framework dependencies
 
 ## Browser Support
@@ -194,8 +194,9 @@ This website is created to showcase the OpenSentry projects, which are licensed 
 
 ## Links
 
-- **OpenSentry - LMV**: https://github.com/Sbussiso/OpenSentry-LVM
-- **OpenSentry Command**: https://github.com/Sbussiso/OpenSentry-Command
+- **Command Center**: https://github.com/SourceBox-LLC/OpenSentry-Command
+- **Camera Node**: https://github.com/SourceBox-LLC/OpenSentry-Node
+- **SourceBox LLC**: https://github.com/SourceBox-LLC
 
 ## Contributing
 
