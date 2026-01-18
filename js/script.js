@@ -47,26 +47,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Node dropdown toggle
     if (dropdownToggle) {
         dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation();
             
-            // Toggle dropdown
+            // Just toggle the dropdown, don't switch tabs yet
             nodeDropdown.classList.toggle('open');
-            
-            // If opening, switch to node panel
-            if (nodeDropdown.classList.contains('open')) {
-                commandBtn.classList.remove('active');
-                this.classList.add('active');
-                
-                // Show node panel
-                tabPanels.forEach(p => p.classList.remove('active'));
-                document.getElementById('node-panel').classList.add('active');
-            }
         });
     }
     
     // Node type selection
     dropdownItems.forEach(item => {
         item.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation();
             
             const nodeType = this.dataset.nodeType;
@@ -79,6 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update dropdown label
             const label = this.querySelector('.node-name').textContent;
             document.querySelector('.dropdown-label').textContent = label;
+            
+            // Show node panel and corresponding instructions
+            commandBtn.classList.remove('active');
+            dropdownToggle.classList.add('active');
+            tabPanels.forEach(p => p.classList.remove('active'));
+            document.getElementById('node-panel').classList.add('active');
             
             // Show corresponding instructions
             document.querySelectorAll('.node-instructions').forEach(inst => {
@@ -103,6 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial state - basic node selected
     if (dropdownItems.length > 0) {
         dropdownItems[0].classList.add('active');
+        // Make sure basic instructions are visible by default
+        const basicInstructions = document.getElementById('basic-node-instructions');
+        if (basicInstructions) {
+            basicInstructions.style.display = 'block';
+        }
     }
     
     // Copy to clipboard functionality
