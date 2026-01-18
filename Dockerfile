@@ -8,6 +8,7 @@ WORKDIR /app
 
 # Copy website files
 COPY index.html .
+COPY docs.html .
 COPY css/ ./css/
 COPY js/ ./js/
 COPY ["Opensentry website vid.mp4", "."]
