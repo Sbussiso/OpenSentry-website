@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenSentry Documentation - Complete Setup & Usage Guide</title>
+    <meta name="description" content="Complete documentation for OpenSentry security camera system - installation, configuration, motion detection, API reference, and troubleshooting guides.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://opensentry.ai/docs.html">
+    <meta property="og:title" content="OpenSentry Documentation">
+    <meta property="og:description" content="Complete documentation for OpenSentry - self-hosted security camera system with motion detection and end-to-end encryption.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Documentation-specific styles */
+        .docs-hero {
+            padding: 120px 0 60px 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .docs-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a8b2d1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .docs-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .docs-container {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+            min-height: 100vh;
+        }
+        
+        .docs-sidebar {
+            width: 280px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .docs-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .docs-sidebar::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+        
+        .docs-nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .docs-nav-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            padding: 0 0.5rem;
+        }
+        
+        .docs-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .docs-nav-item {
+            margin-bottom: 0.25rem;
+        }
+        
+        .docs-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .docs-nav-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--text-primary);
+            transform: translateX(4px);
+        }
+        
+        .docs-nav-link.active {
+            background: var(--gradient-primary);
+            color: #fff;
+            font-weight: 500;
+        }
+        
+        .docs-nav-icon {
+            width: 18px;
+            height: 18px;
+            opacity: 0.6;
+        }
+        
+        .docs-nav-link.active .docs-nav-icon {
+            opacity: 1;
+        }
+        
+        .docs-content {
+            flex: 1;
+            max-width: 900px;
+        }
+        
+        .doc-section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+        
+        .doc-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .doc-section h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .doc-section h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .doc-section p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .doc-section ul, .doc-section ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .doc-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+        
+        .doc-section code {
+            background: var(--bg-secondary);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            color: var(--accent-blue);
+        }
+        
+        .doc-section pre {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .doc-section pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .alert-info {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--accent-yellow);
+        }
+        
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--accent-red);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+        }
+        
+        .feature-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: var(--bg-secondary);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: var(--accent-blue);
+            color: #fff;
+            border-color: var(--accent-blue);
+        }
+        
+        .code-block {
+            position: relative;
+        }
+        
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .quick-link {
+            flex: 1;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+        }
+        
+        .quick-link h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .quick-link p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .docs-container {
+                flex-direction: column;
+            }
+            
+            .docs-sidebar {
+                width: 100%;
+                position: static;
+                max-height: none;
+                border-bottom: 1px solid var(--border-color);
+                margin-bottom: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .docs-hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">Open<span class="logo-highlight">Sentry</span></span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#architecture">Architecture</a></li>
+                <li><a href="index.html#installation">Installation</a></li>
+                <li><a href="docs.html" class="active">Docs</a></li>
+                <li><a href="https://github.com/SourceBox-LLC" target="_blank" class="btn btn-outline">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Documentation Hero -->
+    <section class="docs-hero">
+        <div class="container">
+            <h1>📚 Documentation</h1>
+            <p>Everything you need to set up and manage your OpenSentry security camera system</p>
+            
+            <div class="quick-links">
+                <a href="#getting-started" class="quick-link">
+                    <h3>🚀 Getting Started</h3>
+                    <p>Quick setup guide to get your first camera online</p>
+                </a>
+                <a href="#motion-detection" class="quick-link">
+                    <h3>🎯 Motion Detection</h3>
+                    <p>Configure intelligent motion alerts and notifications</p>
+                </a>
+                <a href="#api-reference" class="quick-link">
+                    <h3>🔌 API Reference</h3>
+                    <p>Integrate OpenSentry with your applications</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Content -->
+    <section class="documentation">
+        <div class="container docs-container">
+            <!-- Sidebar Navigation -->
+            <aside class="docs-sidebar">
+                <div class="docs-nav-section">
+                    <div class="docs-nav-title">Getting Started</div>
+                    <ul class="docs-nav-list">
+                        <li class="docs-nav-item">
+                            <a href="#getting-started" class="docs-nav-link">
+                                <span class="docs-nav-icon">🏁</span>
+                                Quick Start
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#system-requirements" class="docs-nav-link">
+                                <span class="docs-nav-icon">💻</span>
+                                System Requirements
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#installation-guide" class="docs-nav-link">
+                                <span class="docs-nav-icon">📦</span>
+                                Installation
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#first-camera" class="docs-nav-link">
+                                <span class="docs-nav-icon">📷</span>
+                                Adding Your First Camera
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <div class="docs-nav-title">Components</div>
+                    <ul class="docs-nav-list">
+                        <li class="docs-nav-item">
+                            <a href="#command-center" class="docs-nav-link">
+                                <span class="docs-nav-icon">🎛️</span>
+                                Command Center
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#camera-nodes" class="docs-nav-link">
+                                <span class="docs-nav-icon">📹</span>
+                                Camera Nodes
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#motion-detection" class="docs-nav-link">
+                                <span class="docs-nav-icon">🎯</span>
+                                Motion Detection
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <div class="docs-nav-title">Configuration</div>
+                    <ul class="docs-nav-list">
+                        <li class="docs-nav-item">
+                            <a href="#environment-setup" class="docs-nav-link">
+                                <span class="docs-nav-icon">⚙️</span>
+                                Environment Variables
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#security-config" class="docs-nav-link">
+                                <span class="docs-nav-icon">🔐</span>
+                                Security Settings
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#network-config" class="docs-nav-link">
+                                <span class="docs-nav-icon">🌐</span>
+                                Network Configuration
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#notifications" class="docs-nav-link">
+                                <span class="docs-nav-icon">🔔</span>
+                                Notifications
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <div class="docs-nav-title">Advanced</div>
+                    <ul class="docs-nav-list">
+                        <li class="docs-nav-item">
+                            <a href="#api-reference" class="docs-nav-link">
+                                <span class="docs-nav-icon">🔌</span>
+                                API Reference
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#mqtt-protocol" class="docs-nav-link">
+                                <span class="docs-nav-icon">📡</span>
+                                MQTT Protocol
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#remote-access" class="docs-nav-link">
+                                <span class="docs-nav-icon">🌍</span>
+                                Remote Access
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#raspberry-pi" class="docs-nav-link">
+                                <span class="docs-nav-icon">🍓</span>
+                                Raspberry Pi Setup
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <div class="docs-nav-title">Support</div>
+                    <ul class="docs-nav-list">
+                        <li class="docs-nav-item">
+                            <a href="#troubleshooting" class="docs-nav-link">
+                                <span class="docs-nav-icon">🔧</span>
+                                Troubleshooting
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#faq" class="docs-nav-link">
+                                <span class="docs-nav-icon">❓</span>
+                                FAQ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Documentation Content -->
+            <main class="docs-content">
+                <!-- Getting Started Section -->
+                <section id="getting-started" class="doc-section">
+                    <h2>🏁 Getting Started</h2>
+                    <p>OpenSentry is a complete security camera system that runs entirely on your local network. Get up and running in under 5 minutes.</p>
+                    
+                    <h3>Quick Installation</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># 1. Clone the Command Center
+git clone https://github.com/SourceBox-LLC/OpenSentry-Command.git
+cd OpenSentry-Command
+
+# 2. Run setup
+chmod +x setup.sh && ./setup.sh
+
+# 3. Access dashboard at https://localhost:5000</code></pre>
+                    </div>
+                    
+                    <div class="alert alert-success">
+                        <strong>✅ That's it!</strong> Your Command Center is now running. Next, add camera nodes to start monitoring.
+                    </div>
+                    
+                    <h3>What You Get</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>🎛️ Web Dashboard</h4>
+                            <p>Centralized control panel for all your cameras</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🔒 Full Encryption</h4>
+                            <p>HTTPS, RTSPS, and MQTTS protocols</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🎯 Motion Detection</h4>
+                            <p>Real-time alerts with OpenCV</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>📱 Multi-User</h4>
+                            <p>Admin and viewer roles</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Requirements -->
+                <section id="system-requirements" class="doc-section">
+                    <h2>💻 System Requirements</h2>
+                    
+                    <h3>Command Center</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Minimum</th>
+                                <th>Recommended</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>OS</td>
+                                <td>Linux, macOS, Windows (WSL)</td>
+                                <td>Ubuntu 22.04 LTS</td>
+                            </tr>
+                            <tr>
+                                <td>CPU</td>
+                                <td>2 cores</td>
+                                <td>4+ cores</td>
+                            </tr>
+                            <tr>
+                                <td>RAM</td>
+                                <td>2 GB</td>
+                                <td>4+ GB</td>
+                            </tr>
+                            <tr>
+                                <td>Storage</td>
+                                <td>10 GB</td>
+                                <td>50+ GB for recordings</td>
+                            </tr>
+                            <tr>
+                                <td>Docker</td>
+                                <td>20.10+</td>
+                                <td>Latest stable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Camera Nodes</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Device</th>
+                                <th>Basic Node</th>
+                                <th>Motion Node</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Raspberry Pi 3</td>
+                                <td>✅ Supported</td>
+                                <td>⚠️ Limited</td>
+                            </tr>
+                            <tr>
+                                <td>Raspberry Pi 4</td>
+                                <td>✅ Recommended</td>
+                                <td>✅ Recommended</td>
+                            </tr>
+                            <tr>
+                                <td>Raspberry Pi 5</td>
+                                <td>✅ Excellent</td>
+                                <td>✅ Excellent</td>
+                            </tr>
+                            <tr>
+                                <td>Linux PC</td>
+                                <td>✅ Excellent</td>
+                                <td>✅ Excellent</td>
+                            </tr>
+                            <tr>
+                                <td>Camera</td>
+                                <td>Any USB webcam</td>
+                                <td>Any USB webcam</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Installation Guide -->
+                <section id="installation-guide" class="doc-section">
+                    <h2>📦 Installation Guide</h2>
+                    
+                    <h3>Prerequisites</h3>
+                    <h4>Install Docker</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Linux
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+# Log out and back in
+
+# macOS
+# Download Docker Desktop from docker.com
+
+# Windows
+# Install WSL2 first, then Docker Desktop</code></pre>
+                    </div>
+                    
+                    <h3>Command Center Setup</h3>
+                    <ol>
+                        <li>
+                            <strong>Clone the repository</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                                <pre><code>git clone https://github.com/SourceBox-LLC/OpenSentry-Command.git
+cd OpenSentry-Command</code></pre>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Run the setup script</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                                <pre><code>chmod +x setup.sh && ./setup.sh</code></pre>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Create your admin account</strong>
+                            <p>The setup wizard will prompt you for:</p>
+                            <ul>
+                                <li>Username (default: admin)</li>
+                                <li>Password (minimum 8 characters)</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Access the dashboard</strong>
+                            <p>Open your browser and navigate to:</p>
+                            <div class="code-block">
+                                <pre><code>https://localhost:5000</code></pre>
+                            </div>
+                        </li>
+                    </ol>
+                    
+                    <div class="alert alert-info">
+                        <strong>Certificate Warning:</strong> On first visit, your browser will show a certificate warning. This is normal for self-signed certificates. Click "Advanced" → "Proceed" to continue.
+                    </div>
+                </section>
+
+                <!-- First Camera -->
+                <section id="first-camera" class="doc-section">
+                    <h2>📷 Adding Your First Camera</h2>
+                    
+                    <h3>Step 1: Get Your Security Secret</h3>
+                    <ol>
+                        <li>Log into the Command Center</li>
+                        <li>Click the ⚙️ Settings icon (top right)</li>
+                        <li>Copy your Security Secret</li>
+                    </ol>
+                    
+                    <h3>Step 2: Set Up a Camera Node</h3>
+                    
+                    <h4>Option A: Basic Camera Node</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># On your camera device (e.g., Raspberry Pi)
+git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git
+cd OpenSentry-Node
+chmod +x setup.sh && ./setup.sh</code></pre>
+                    </div>
+                    
+                    <h4>Option B: Motion Detection Node</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># For cameras with motion detection
+git clone https://github.com/SourceBox-LLC/OpenSentry-MotionNode.git
+cd OpenSentry-MotionNode
+chmod +x setup.sh && ./setup.sh</code></pre>
+                    </div>
+                    
+                    <h3>Step 3: Configure the Node</h3>
+                    <p>During setup, you'll be asked for:</p>
+                    <ul>
+                        <li><strong>Camera name:</strong> e.g., "Front Door", "Backyard"</li>
+                        <li><strong>Camera device:</strong> Usually <code>/dev/video0</code></li>
+                        <li><strong>Security secret:</strong> Paste the secret from Step 1</li>
+                    </ul>
+                    
+                    <div class="alert alert-success">
+                        <strong>Auto-Discovery:</strong> Your camera will automatically appear in the Command Center within 30 seconds!
+                    </div>
+                </section>
+
+                <!-- Command Center -->
+                <section id="command-center" class="doc-section">
+                    <h2>🎛️ Command Center</h2>
+                    <p>The Command Center is your central hub for managing all cameras, users, and settings.</p>
+                    
+                    <h3>Dashboard Features</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>Live View</h4>
+                            <p>Real-time video feeds from all cameras</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Camera Controls</h4>
+                            <p>Start, stop, pause individual streams</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Motion Alerts</h4>
+                            <p>Instant notifications when motion detected</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Motion History</h4>
+                            <p>View recent motion events per camera</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>User Management</h4>
+                            <p>Create admin and viewer accounts</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Settings</h4>
+                            <p>Configure notifications and security</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Camera Management</h3>
+                    <h4>Camera Controls</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Button</th>
+                                <th>Action</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>▶ Start</td>
+                                <td>Start streaming</td>
+                                <td>Begin video feed from camera</td>
+                            </tr>
+                            <tr>
+                                <td>⏸ Pause</td>
+                                <td>Pause stream</td>
+                                <td>Temporarily stop video feed</td>
+                            </tr>
+                            <tr>
+                                <td>⏻ Shutdown</td>
+                                <td>Turn off camera</td>
+                                <td>Completely shut down the node</td>
+                            </tr>
+                            <tr>
+                                <td>📜 History</td>
+                                <td>Motion history</td>
+                                <td>View recent motion events</td>
+                            </tr>
+                            <tr>
+                                <td>❌ Forget</td>
+                                <td>Remove camera</td>
+                                <td>Delete camera from system</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Status Indicators</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Color</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Streaming</td>
+                                <td>🟢 Green</td>
+                                <td>Camera is actively streaming</td>
+                            </tr>
+                            <tr>
+                                <td>Idle</td>
+                                <td>🟡 Yellow</td>
+                                <td>Camera is paused</td>
+                            </tr>
+                            <tr>
+                                <td>Offline</td>
+                                <td>🔴 Red</td>
+                                <td>Camera not responding</td>
+                            </tr>
+                            <tr>
+                                <td>Motion</td>
+                                <td>🔴 Pulsing</td>
+                                <td>Motion currently detected</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>User Management</h3>
+                    <p>Admins can create and manage user accounts from Settings → Manage Users.</p>
+                    
+                    <h4>User Roles</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Permissions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Admin</strong></td>
+                                <td>
+                                    <ul>
+                                        <li>View all cameras</li>
+                                        <li>Control cameras (start/stop/shutdown)</li>
+                                        <li>Manage users</li>
+                                        <li>Change settings</li>
+                                        <li>View motion history</li>
+                                        <li>Forget cameras</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Viewer</strong></td>
+                                <td>
+                                    <ul>
+                                        <li>View camera streams</li>
+                                        <li>View motion alerts</li>
+                                        <li>View motion history</li>
+                                        <li>Cannot control cameras</li>
+                                        <li>Cannot change settings</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Camera Nodes -->
+                <section id="camera-nodes" class="doc-section">
+                    <h2>📹 Camera Nodes</h2>
+                    <p>Camera nodes are individual devices that capture and stream video to the Command Center.</p>
+                    
+                    <h3>Node Types Comparison</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Basic Node</th>
+                                <th>Motion Node</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Live Streaming</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td>Motion Detection</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td>Motion Alerts</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td>Motion History</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td>CPU Usage</td>
+                                <td>~10-15%</td>
+                                <td>~20-30%</td>
+                            </tr>
+                            <tr>
+                                <td>Memory Usage</td>
+                                <td>~100MB</td>
+                                <td>~150MB</td>
+                            </tr>
+                            <tr>
+                                <td>Best For</td>
+                                <td>Simple monitoring</td>
+                                <td>Security alerts</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Configuration</h3>
+                    <p>Camera nodes are configured via environment variables in the <code>.env</code> file:</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Camera Settings
+CAMERA_NAME=Front Door
+CAMERA_DEVICE=/dev/video0
+CAMERA_ID=front-door
+
+# Security
+OPENSENTRY_SECRET=your-secret-key
+
+# Network
+COMMAND_CENTER_HOST=localhost</code></pre>
+                    </div>
+                    
+                    <h3>Common Commands</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># View logs
+docker logs opensentry-node-&lt;camera-id&gt; -f
+
+# Restart node
+docker restart opensentry-node-&lt;camera-id&gt;
+
+# Stop node
+docker stop opensentry-node-&lt;camera-id&gt;
+
+# Remove node
+docker rm -f opensentry-node-&lt;camera-id&gt;</code></pre>
+                    </div>
+                </section>
+
+                <!-- Motion Detection -->
+                <section id="motion-detection" class="doc-section">
+                    <h2>🎯 Motion Detection</h2>
+                    <p>OpenSentry's motion detection uses OpenCV to analyze video frames in real-time and alert you to any movement.</p>
+                    
+                    <h3>How It Works</h3>
+                    <ol>
+                        <li><strong>Frame Analysis:</strong> OpenCV compares consecutive video frames</li>
+                        <li><strong>Motion Detection:</strong> Identifies areas with significant pixel changes</li>
+                        <li><strong>Event Publishing:</strong> Sends JSON events via MQTT to Command Center</li>
+                        <li><strong>Visual Feedback:</strong> Shows red bounding box around motion</li>
+                        <li><strong>Notifications:</strong> Triggers alerts in the dashboard</li>
+                    </ol>
+                    
+                    <h3>Motion Event Format</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>{
+  "event": "motion_start",
+  "timestamp": 1234567890,
+  "area_x": 100,
+  "area_y": 200,
+  "area_width": 300,
+  "area_height": 400
+}</code></pre>
+                    </div>
+                    
+                    <h3>Sensitivity Tuning</h3>
+                    <p>Adjust these parameters in your motion node's configuration:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Default</th>
+                                <th>Range</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MOTION_THRESHOLD</td>
+                                <td>25</td>
+                                <td>10-50</td>
+                                <td>Lower = more sensitive</td>
+                            </tr>
+                            <tr>
+                                <td>MOTION_MIN_AREA</td>
+                                <td>500</td>
+                                <td>100-5000</td>
+                                <td>Minimum pixels to trigger</td>
+                            </tr>
+                            <tr>
+                                <td>MOTION_COOLDOWN</td>
+                                <td>2</td>
+                                <td>1-10</td>
+                                <td>Seconds between events</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Recommended Settings</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Environment</th>
+                                <th>Threshold</th>
+                                <th>Min Area</th>
+                                <th>Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Indoor</td>
+                                <td>20-25</td>
+                                <td>500</td>
+                                <td>Detect people, pets</td>
+                            </tr>
+                            <tr>
+                                <td>Outdoor</td>
+                                <td>30-35</td>
+                                <td>1000</td>
+                                <td>Ignore wind, small animals</td>
+                            </tr>
+                            <tr>
+                                <td>High Security</td>
+                                <td>15-20</td>
+                                <td>300</td>
+                                <td>Maximum sensitivity</td>
+                            </tr>
+                            <tr>
+                                <td>High Traffic</td>
+                                <td>25-30</td>
+                                <td>800</td>
+                                <td>Balance false positives</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Motion Features in Dashboard</h3>
+                    <ul>
+                        <li><strong>Real-time Alerts:</strong> Red "MOTION DETECTED!" badge on video feed</li>
+                        <li><strong>Visual Effects:</strong> Camera card pulses with red glow during motion</li>
+                        <li><strong>Toast Notifications:</strong> Pop-up alerts (configurable)</li>
+                        <li><strong>Motion History:</strong> Last 100 events stored per camera</li>
+                        <li><strong>History Button:</strong> Click to view recent motion events with timestamps</li>
+                    </ul>
+                </section>
+
+                <!-- Environment Setup -->
+                <section id="environment-setup" class="doc-section">
+                    <h2>⚙️ Environment Variables</h2>
+                    
+                    <h3>Command Center (.env)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Authentication
+OPENSENTRY_USERNAME=admin
+OPENSENTRY_PASSWORD=your-password
+
+# Security
+OPENSENTRY_SECRET=your-secret-key
+
+# Session
+SESSION_TIMEOUT=30  # minutes
+
+# HTTPS
+HTTPS_ENABLED=true
+
+# MQTT
+MQTT_PORT=1883
+MQTT_USE_TLS=false</code></pre>
+                    </div>
+                    
+                    <h3>Camera Node (.env)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Camera
+CAMERA_NAME=Front Door
+CAMERA_DEVICE=/dev/video0
+CAMERA_ID=front-door
+
+# Security
+OPENSENTRY_SECRET=your-secret-key
+
+# Network
+COMMAND_CENTER_HOST=localhost
+
+# Motion Detection (Motion Node only)
+MOTION_THRESHOLD=25
+MOTION_MIN_AREA=500
+MOTION_COOLDOWN=2</code></pre>
+                    </div>
+                </section>
+
+                <!-- Security Config -->
+                <section id="security-config" class="doc-section">
+                    <h2>🔐 Security Configuration</h2>
+                    
+                    <h3>Encryption Protocols</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Protocol</th>
+                                <th>Port</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>HTTPS</td>
+                                <td>5000</td>
+                                <td>Web dashboard (TLS encrypted)</td>
+                            </tr>
+                            <tr>
+                                <td>RTSPS</td>
+                                <td>8322</td>
+                                <td>Video streams (TLS encrypted)</td>
+                            </tr>
+                            <tr>
+                                <td>MQTT/TLS</td>
+                                <td>8883</td>
+                                <td>Control commands (optional TLS)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Security Secret</h3>
+                    <p>The <code>OPENSENTRY_SECRET</code> is used to:</p>
+                    <ul>
+                        <li>Authenticate camera nodes with Command Center</li>
+                        <li>Derive RTSP and MQTT credentials</li>
+                        <li>Encrypt sensitive data</li>
+                    </ul>
+                    
+                    <div class="alert alert-warning">
+                        <strong>Important:</strong> All camera nodes must use the same security secret as the Command Center.
+                    </div>
+                    
+                    <h3>Certificate Management</h3>
+                    <p>SSL certificates are automatically generated on first run. To trust them:</p>
+                    
+                    <h4>Browser Trust</h4>
+                    <ul>
+                        <li><strong>Chrome/Edge:</strong> Accept certificate on first visit</li>
+                        <li><strong>Firefox:</strong> Click "Advanced" → "Accept the Risk"</li>
+                        <li><strong>Safari:</strong> Click "Show Details" → "Visit Website"</li>
+                    </ul>
+                    
+                    <h4>System Trust (Optional)</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Linux
+sudo cp certs/ca.crt /usr/local/share/ca-certificates/opensentry-ca.crt
+sudo update-ca-certificates
+
+# macOS
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain certs/ca.crt</code></pre>
+                    </div>
+                </section>
+
+                <!-- Network Config -->
+                <section id="network-config" class="doc-section">
+                    <h2>🌐 Network Configuration</h2>
+                    
+                    <h3>Service Discovery</h3>
+                    <p>OpenSentry uses mDNS (Multicast DNS) for automatic camera discovery:</p>
+                    <ul>
+                        <li>Cameras broadcast their presence on the network</li>
+                        <li>Command Center automatically detects new cameras</li>
+                        <li>No manual IP configuration required</li>
+                    </ul>
+                    
+                    <div class="alert alert-info">
+                        <strong>Network Requirement:</strong> All devices must be on the same local network for auto-discovery to work.
+                    </div>
+                    
+                    <h3>Firewall Rules</h3>
+                    <p>If using a firewall, allow these ports:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Port</th>
+                                <th>Protocol</th>
+                                <th>Direction</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5000</td>
+                                <td>TCP</td>
+                                <td>Inbound</td>
+                                <td>Web dashboard</td>
+                            </tr>
+                            <tr>
+                                <td>8322</td>
+                                <td>TCP</td>
+                                <td>Inbound</td>
+                                <td>RTSP video streams</td>
+                            </tr>
+                            <tr>
+                                <td>1883</td>
+                                <td>TCP</td>
+                                <td>Inbound</td>
+                                <td>MQTT messages</td>
+                            </tr>
+                            <tr>
+                                <td>5353</td>
+                                <td>UDP</td>
+                                <td>Both</td>
+                                <td>mDNS discovery</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Docker Networking</h3>
+                    <p>OpenSentry uses host networking mode by default:</p>
+                    <div class="code-block">
+                        <pre><code>network_mode: host</code></pre>
+                    </div>
+                    <p>This ensures:</p>
+                    <ul>
+                        <li>mDNS discovery works properly</li>
+                        <li>No port mapping required</li>
+                        <li>Direct network access for streams</li>
+                    </ul>
+                </section>
+
+                <!-- Notifications -->
+                <section id="notifications" class="doc-section">
+                    <h2>🔔 Notifications</h2>
+                    
+                    <h3>Notification Types</h3>
+                    <ul>
+                        <li><strong>Motion Alerts:</strong> When motion is detected by camera</li>
+                        <li><strong>Camera Status:</strong> When camera goes online/offline</li>
+                        <li><strong>System Events:</strong> User login, configuration changes</li>
+                    </ul>
+                    
+                    <h3>Configuration</h3>
+                    <p>Configure notifications in the Command Center:</p>
+                    <ol>
+                        <li>Click ⚙️ Settings</li>
+                        <li>Go to Notifications section</li>
+                        <li>Toggle settings:
+                            <ul>
+                                <li><strong>Motion Detection Alerts:</strong> Enable/disable motion notifications</li>
+                                <li><strong>Toast Notifications:</strong> Show/hide pop-up alerts</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> Notification preferences are saved per browser using localStorage.
+                    </div>
+                </section>
+
+                <!-- API Reference -->
+                <section id="api-reference" class="doc-section">
+                    <h2>🔌 API Reference</h2>
+                    <p>OpenSentry provides a REST API for integration with external applications.</p>
+                    
+                    <h3>Authentication</h3>
+                    <p>All API endpoints require authentication. Use session cookies after login.</p>
+                    
+                    <h3>Endpoints</h3>
+                    
+                    <h4>GET /api/cameras</h4>
+                    <p>List all cameras with their current status and motion data.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>curl -k https://localhost:5000/api/cameras \
+  -H "Cookie: session=your-session-cookie"</code></pre>
+                    </div>
+                    
+                    <p><strong>Response:</strong></p>
+                    <div class="code-block">
+                        <pre><code>{
+  "camera-id": {
+    "name": "Front Door",
+    "status": "streaming",
+    "node_type": "motion",
+    "capabilities": "streaming,motion_detection",
+    "motion_active": false,
+    "motion_events": [...],
+    "last_seen": 1234567890
+  }
+}</code></pre>
+                    </div>
+                    
+                    <h4>GET /api/camera/{id}/status</h4>
+                    <p>Get status of a specific camera.</p>
+                    
+                    <h4>POST /api/camera/{id}/command</h4>
+                    <p>Send command to a camera.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>curl -k -X POST https://localhost:5000/api/camera/front-door/command \
+  -H "Content-Type: application/json" \
+  -H "Cookie: session=your-session-cookie" \
+  -d '{"command": "start"}'</code></pre>
+                    </div>
+                    
+                    <p><strong>Available Commands:</strong></p>
+                    <ul>
+                        <li><code>start</code> - Start streaming</li>
+                        <li><code>stop</code> - Stop streaming</li>
+                        <li><code>shutdown</code> - Shut down camera node</li>
+                    </ul>
+                    
+                    <h4>DELETE /api/camera/{id}/forget</h4>
+                    <p>Remove a camera from the system.</p>
+                    
+                    <h4>POST /api/regenerate-secret</h4>
+                    <p>Generate a new security secret (admin only).</p>
+                </section>
+
+                <!-- MQTT Protocol -->
+                <section id="mqtt-protocol" class="doc-section">
+                    <h2>📡 MQTT Protocol</h2>
+                    <p>MQTT is used for real-time communication between nodes and Command Center.</p>
+                    
+                    <h3>Topics</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Topic</th>
+                                <th>Direction</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>opensentry/{id}/status</td>
+                                <td>Node → Center</td>
+                                <td>Node health and capabilities</td>
+                            </tr>
+                            <tr>
+                                <td>opensentry/{id}/motion</td>
+                                <td>Node → Center</td>
+                                <td>Motion detection events</td>
+                            </tr>
+                            <tr>
+                                <td>opensentry/{id}/command</td>
+                                <td>Center → Node</td>
+                                <td>Control commands</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Message Formats</h3>
+                    
+                    <h4>Status Message</h4>
+                    <div class="code-block">
+                        <pre><code>{
+  "status": "streaming",
+  "node_type": "motion",
+  "capabilities": "streaming,motion_detection",
+  "timestamp": 1234567890
+}</code></pre>
+                    </div>
+                    
+                    <h4>Motion Event</h4>
+                    <div class="code-block">
+                        <pre><code>{
+  "event": "motion_start",
+  "timestamp": 1234567890,
+  "area_x": 100,
+  "area_y": 200,
+  "area_width": 300,
+  "area_height": 400
+}</code></pre>
+                    </div>
+                    
+                    <h4>Commands</h4>
+                    <div class="code-block">
+                        <pre><code>start
+stop
+shutdown</code></pre>
+                    </div>
+                </section>
+
+                <!-- Remote Access -->
+                <section id="remote-access" class="doc-section">
+                    <h2>🌍 Remote Access</h2>
+                    <p>Access your cameras from anywhere using Tailscale VPN.</p>
+                    
+                    <h3>Why Tailscale?</h3>
+                    <ul>
+                        <li>Free for personal use (up to 100 devices)</li>
+                        <li>No port forwarding required</li>
+                        <li>End-to-end encrypted (WireGuard)</li>
+                        <li>Works behind any firewall/NAT</li>
+                        <li>Your server stays hidden from public internet</li>
+                    </ul>
+                    
+                    <h3>Setup Guide</h3>
+                    
+                    <h4>1. Install Tailscale on Server</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up</code></pre>
+                    </div>
+                    
+                    <h4>2. Install on Your Devices</h4>
+                    <p>Download Tailscale for your devices:</p>
+                    <ul>
+                        <li><a href="https://tailscale.com/download" target="_blank">Download Tailscale</a></li>
+                        <li>Sign in with the same account</li>
+                    </ul>
+                    
+                    <h4>3. Get Your Server's Tailscale IP</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>tailscale ip -4
+# Example output: 100.64.0.1</code></pre>
+                    </div>
+                    
+                    <h4>4. Access from Anywhere</h4>
+                    <div class="code-block">
+                        <pre><code>https://YOUR_TAILSCALE_IP:5000</code></pre>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <strong>Certificate Note:</strong> Your browser will show a certificate warning since the cert is for localhost. This is normal - the connection is still encrypted.
+                    </div>
+                </section>
+
+                <!-- Raspberry Pi -->
+                <section id="raspberry-pi" class="doc-section">
+                    <h2>🍓 Raspberry Pi Setup</h2>
+                    <p>Raspberry Pi is perfect for camera nodes - affordable, low-power, and reliable.</p>
+                    
+                    <h3>Compatibility</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Basic Node</th>
+                                <th>Motion Node</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pi Zero 2 W</td>
+                                <td>⚠️ Limited</td>
+                                <td>❌ Not recommended</td>
+                                <td>Low resolution only</td>
+                            </tr>
+                            <tr>
+                                <td>Pi 3B/3B+</td>
+                                <td>✅ Good</td>
+                                <td>⚠️ Limited</td>
+                                <td>720p recommended</td>
+                            </tr>
+                            <tr>
+                                <td>Pi 4 (2GB+)</td>
+                                <td>✅ Excellent</td>
+                                <td>✅ Good</td>
+                                <td>1080p capable</td>
+                            </tr>
+                            <tr>
+                                <td>Pi 5</td>
+                                <td>✅ Excellent</td>
+                                <td>✅ Excellent</td>
+                                <td>Best performance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Installation</h3>
+                    
+                    <h4>1. Install Raspberry Pi OS</h4>
+                    <ul>
+                        <li>Use Raspberry Pi Imager</li>
+                        <li>Choose "Raspberry Pi OS Lite (64-bit)"</li>
+                        <li>Enable SSH in settings</li>
+                    </ul>
+                    
+                    <h4>2. SSH into Your Pi</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>ssh pi@raspberrypi.local</code></pre>
+                    </div>
+                    
+                    <h4>3. Install Docker</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker pi
+sudo reboot</code></pre>
+                    </div>
+                    
+                    <h4>4. Install Camera Node</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># For basic node
+git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git
+cd OpenSentry-Node
+
+# For motion detection
+git clone https://github.com/SourceBox-LLC/OpenSentry-MotionNode.git
+cd OpenSentry-MotionNode
+
+# Run setup
+chmod +x setup.sh && ./setup.sh</code></pre>
+                    </div>
+                    
+                    <h3>Performance Tips</h3>
+                    <ul>
+                        <li>Use wired Ethernet for best streaming quality</li>
+                        <li>Use a heatsink/fan for Pi 4/5 with motion detection</li>
+                        <li>Reduce resolution if experiencing lag</li>
+                        <li>Use a quality power supply (3A for Pi 4/5)</li>
+                    </ul>
+                </section>
+
+                <!-- Troubleshooting -->
+                <section id="troubleshooting" class="doc-section">
+                    <h2>🔧 Troubleshooting</h2>
+                    
+                    <h3>Common Issues</h3>
+                    
+                    <h4>Camera Not Appearing in Dashboard</h4>
+                    <ul>
+                        <li>Ensure both devices are on the same network</li>
+                        <li>Check that security secrets match</li>
+                        <li>Wait 30 seconds for auto-discovery</li>
+                        <li>Check camera node logs: <code>docker logs opensentry-node-{id}</code></li>
+                    </ul>
+                    
+                    <h4>No Video Feed</h4>
+                    <ul>
+                        <li>Click "Start" button on camera card</li>
+                        <li>Check camera is plugged in: <code>ls /dev/video*</code></li>
+                        <li>Try different camera device: <code>CAMERA_DEVICE=/dev/video1</code></li>
+                    </ul>
+                    
+                    <h4>Motion Not Detected</h4>
+                    <ul>
+                        <li>Ensure using Motion Node (not Basic Node)</li>
+                        <li>Check MQTT connection in logs</li>
+                        <li>Adjust sensitivity: lower MOTION_THRESHOLD value</li>
+                        <li>Ensure adequate lighting</li>
+                    </ul>
+                    
+                    <h4>Too Many False Positives</h4>
+                    <ul>
+                        <li>Increase MOTION_THRESHOLD (30-35)</li>
+                        <li>Increase MOTION_MIN_AREA (1000+)</li>
+                        <li>Add MOTION_COOLDOWN time</li>
+                        <li>Check for environmental factors (shadows, reflections)</li>
+                    </ul>
+                    
+                    <h4>Can't Login</h4>
+                    <ul>
+                        <li>Default credentials: admin / opensentry</li>
+                        <li>Check .env file for custom credentials</li>
+                        <li>Wait 5 minutes if account locked</li>
+                    </ul>
+                    
+                    <h4>Port Already in Use</h4>
+                    <ul>
+                        <li>Stop other services on port 5000</li>
+                        <li>Or change port in docker-compose.yml</li>
+                    </ul>
+                    
+                    <h3>Debug Commands</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># View Command Center logs
+docker logs opensentry-command-center -f
+
+# View camera node logs
+docker logs opensentry-node-{camera-id} -f
+
+# Check Docker containers
+docker ps
+
+# Test camera device
+ffmpeg -f v4l2 -i /dev/video0 -frames 1 test.jpg
+
+# Check network
+ip addr show
+
+# Check mDNS
+avahi-browse -a</code></pre>
+                    </div>
+                </section>
+
+                <!-- FAQ -->
+                <section id="faq" class="doc-section">
+                    <h2>❓ Frequently Asked Questions</h2>
+                    
+                    <h4>Is OpenSentry really free?</h4>
+                    <p>Yes! OpenSentry is 100% open source under the MIT license. Free for personal and commercial use.</p>
+                    
+                    <h4>Does it require internet?</h4>
+                    <p>No. OpenSentry runs entirely on your local network. Internet is only needed for initial Docker image downloads.</p>
+                    
+                    <h4>How many cameras can I add?</h4>
+                    <p>Unlimited! Performance depends on your hardware. A typical PC can handle 10-20 cameras easily.</p>
+                    
+                    <h4>Can I use IP cameras?</h4>
+                    <p>Currently, OpenSentry supports USB webcams. IP camera support is on the roadmap.</p>
+                    
+                    <h4>Is the video encrypted?</h4>
+                    <p>Yes! All video streams use RTSPS (RTSP over TLS) encryption.</p>
+                    
+                    <h4>Can I record video?</h4>
+                    <p>Recording features are coming soon. Currently, you can view live streams and motion events.</p>
+                    
+                    <h4>Does it work on Windows?</h4>
+                    <p>Yes, using WSL2 (Windows Subsystem for Linux). See the installation guide for details.</p>
+                    
+                    <h4>Can I access cameras remotely?</h4>
+                    <p>Yes! Use Tailscale VPN for secure remote access. See the Remote Access section.</p>
+                    
+                    <h4>What's the difference between node types?</h4>
+                    <p>Basic nodes provide simple streaming. Motion nodes add intelligent motion detection with OpenCV.</p>
+                    
+                    <h4>How do I update OpenSentry?</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>git pull
+docker-compose down
+docker-compose up -d --build</code></pre>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>OpenSentry</h4>
+                    <p class="footer-description">Open-source security camera system with privacy at its core.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/SourceBox-LLC" target="_blank" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#getting-started">Getting Started</a></li>
+                        <li><a href="#motion-detection">Motion Detection</a></li>
+                        <li><a href="#api-reference">API Reference</a></li>
+                        <li><a href="#troubleshooting">Troubleshooting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Components</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Command" target="_blank">Command Center</a></li>
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Node" target="_blank">Basic Node</a></li>
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-MotionNode" target="_blank">Motion Node</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Command/issues" target="_blank">Report Issue</a></li>
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Command/discussions" target="_blank">Discussions</a></li>
+                        <li><a href="https://github.com/SourceBox-LLC" target="_blank">SourceBox</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OpenSentry. MIT License. Made with ❤️ by the OpenSentry Team.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scroll for sidebar navigation
+        document.querySelectorAll('.docs-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Update active state
+                    document.querySelectorAll('.docs-nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'var(--accent-green)';
+                button.style.borderColor = 'var(--accent-green)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                    button.style.borderColor = '';
+                }, 2000);
+            });
+        }
+
+        // Highlight current section in sidebar on scroll
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('.docs-nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

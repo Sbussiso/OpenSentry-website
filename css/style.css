@@ -719,6 +719,17 @@ a {
     color: var(--text-muted);
 }
 
+.docs-cta {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.docs-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 /* Security Section */
 .security {
     padding: var(--section-padding) 0;
