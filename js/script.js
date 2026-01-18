@@ -20,23 +20,90 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Tab functionality for installation section
-    const tabBtns = document.querySelectorAll('.tab-btn');
+    // Tab functionality for installation section with dropdown
+    const commandBtn = document.querySelector('.tab-btn[data-tab="command"]');
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const nodeDropdown = document.querySelector('.node-dropdown');
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
     const tabPanels = document.querySelectorAll('.tab-panel');
+    let currentNodeType = 'basic'; // Default to basic node
     
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const tabId = this.dataset.tab;
+    // Command Center tab
+    if (commandBtn) {
+        commandBtn.addEventListener('click', function() {
+            // Remove active from node dropdown
+            dropdownToggle.classList.remove('active');
+            nodeDropdown.classList.remove('open');
             
-            // Remove active from all buttons and panels
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabPanels.forEach(p => p.classList.remove('active'));
-            
-            // Add active to clicked button and corresponding panel
+            // Add active to command button
             this.classList.add('active');
-            document.getElementById(`${tabId}-panel`).classList.add('active');
+            
+            // Show command panel
+            tabPanels.forEach(p => p.classList.remove('active'));
+            document.getElementById('command-panel').classList.add('active');
+        });
+    }
+    
+    // Node dropdown toggle
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Toggle dropdown
+            nodeDropdown.classList.toggle('open');
+            
+            // If opening, switch to node panel
+            if (nodeDropdown.classList.contains('open')) {
+                commandBtn.classList.remove('active');
+                this.classList.add('active');
+                
+                // Show node panel
+                tabPanels.forEach(p => p.classList.remove('active'));
+                document.getElementById('node-panel').classList.add('active');
+            }
+        });
+    }
+    
+    // Node type selection
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            const nodeType = this.dataset.nodeType;
+            currentNodeType = nodeType;
+            
+            // Update active state
+            dropdownItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update dropdown label
+            const label = this.querySelector('.node-name').textContent;
+            document.querySelector('.dropdown-label').textContent = label;
+            
+            // Show corresponding instructions
+            document.querySelectorAll('.node-instructions').forEach(inst => {
+                inst.style.display = 'none';
+            });
+            document.getElementById(`${nodeType}-node-instructions`).style.display = 'block';
+            
+            // Close dropdown after selection
+            setTimeout(() => {
+                nodeDropdown.classList.remove('open');
+            }, 200);
         });
     });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!nodeDropdown.contains(e.target)) {
+            nodeDropdown.classList.remove('open');
+        }
+    });
+    
+    // Set initial state - basic node selected
+    if (dropdownItems.length > 0) {
+        dropdownItems[0].classList.add('active');
+    }
     
     // Copy to clipboard functionality
     document.querySelectorAll('.copy-btn').forEach(btn => {

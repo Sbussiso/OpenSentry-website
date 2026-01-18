@@ -251,7 +251,30 @@
             </div>
             <div class="install-tabs">
                 <button class="tab-btn active" data-tab="command">Command Center</button>
-                <button class="tab-btn" data-tab="node">Camera Node</button>
+                <div class="node-dropdown">
+                    <button class="tab-btn dropdown-toggle" data-tab="node">
+                        <span class="dropdown-label">Camera Node</span>
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" data-node-type="basic">
+                            <span class="node-icon">📷</span>
+                            <div class="node-info">
+                                <span class="node-name">Basic Node</span>
+                                <span class="node-desc">Simple streaming</span>
+                            </div>
+                        </button>
+                        <button class="dropdown-item" data-node-type="motion">
+                            <span class="node-icon">🎯</span>
+                            <div class="node-info">
+                                <span class="node-name">Motion Detection Node</span>
+                                <span class="node-desc">Streaming + motion alerts</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="install-content">
                 <div class="tab-panel active" id="command-panel">
@@ -290,33 +313,78 @@
                     </div>
                 </div>
                 <div class="tab-panel" id="node-panel">
-                    <div class="install-steps">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>Clone the repository</h4>
-                                <div class="code-block">
-                                    <code>git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git</code>
-                                    <button class="copy-btn" data-copy="git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git">Copy</button>
+                    <!-- Basic Node Instructions -->
+                    <div class="node-instructions" id="basic-node-instructions">
+                        <div class="node-header">
+                            <span class="node-badge">📷 Basic Camera Node</span>
+                            <p class="node-description">Simple streaming without motion detection</p>
+                        </div>
+                        <div class="install-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Clone the repository</h4>
+                                    <div class="code-block">
+                                        <code>git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git</code>
+                                        <button class="copy-btn" data-copy="git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Run the setup script</h4>
+                                    <div class="code-block">
+                                        <code>cd OpenSentry-Node && chmod +x setup.sh && ./setup.sh</code>
+                                        <button class="copy-btn" data-copy="cd OpenSentry-Node && chmod +x setup.sh && ./setup.sh">Copy</button>
+                                    </div>
+                                    <p class="step-note">Enter the Security Secret from your Command Center settings.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Camera auto-discovers</h4>
+                                    <p class="step-note">The node announces itself via mDNS. It will appear in your Command Center dashboard within 30 seconds.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h4>Run the setup script</h4>
-                                <div class="code-block">
-                                    <code>cd OpenSentry-Node && chmod +x setup.sh && ./setup.sh</code>
-                                    <button class="copy-btn" data-copy="cd OpenSentry-Node && chmod +x setup.sh && ./setup.sh">Copy</button>
-                                </div>
-                                <p class="step-note">Enter the Security Secret from your Command Center settings.</p>
-                            </div>
+                    </div>
+                    
+                    <!-- Motion Detection Node Instructions -->
+                    <div class="node-instructions" id="motion-node-instructions" style="display: none;">
+                        <div class="node-header">
+                            <span class="node-badge motion">🎯 Motion Detection Node</span>
+                            <p class="node-description">Advanced node with OpenCV-powered motion detection and alerts</p>
                         </div>
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h4>Camera auto-discovers</h4>
-                                <p class="step-note">The node announces itself via mDNS. It will appear in your Command Center dashboard within 30 seconds.</p>
+                        <div class="install-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Clone the repository</h4>
+                                    <div class="code-block">
+                                        <code>git clone https://github.com/SourceBox-LLC/OpenSentry-MotionNode.git</code>
+                                        <button class="copy-btn" data-copy="git clone https://github.com/SourceBox-LLC/OpenSentry-MotionNode.git">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Run the setup script</h4>
+                                    <div class="code-block">
+                                        <code>cd OpenSentry-MotionNode && chmod +x setup.sh && ./setup.sh</code>
+                                        <button class="copy-btn" data-copy="cd OpenSentry-MotionNode && chmod +x setup.sh && ./setup.sh">Copy</button>
+                                    </div>
+                                    <p class="step-note">Enter the Security Secret from your Command Center settings.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Motion detection ready</h4>
+                                    <p class="step-note">Your motion-enabled camera will appear in the dashboard with a 🎯 indicator. Motion events trigger instant alerts!</p>
+                                </div>
                             </div>
                         </div>
                     </div>
