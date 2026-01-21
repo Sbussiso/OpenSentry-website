@@ -400,9 +400,13 @@
                     <h3>🚀 Getting Started</h3>
                     <p>Quick setup guide to get your first camera online</p>
                 </a>
-                <a href="#motion-detection" class="quick-link">
-                    <h3>🎯 Motion Detection</h3>
-                    <p>Configure intelligent motion alerts and notifications</p>
+                <a href="#camera-nodes" class="quick-link">
+                    <h3>📹 Camera Nodes</h3>
+                    <p>Compare Basic, Motion, Face, and Object Detection nodes</p>
+                </a>
+                <a href="#object-detection" class="quick-link">
+                    <h3>🔍 AI Detection</h3>
+                    <p>YOLOv4-powered object detection for 80+ classes</p>
                 </a>
                 <a href="#api-reference" class="quick-link">
                     <h3>🔌 API Reference</h3>
@@ -462,10 +466,28 @@
                                 Camera Nodes
                             </a>
                         </li>
+                    </ul>
+                </div>
+                
+                <div class="docs-nav-section">
+                    <div class="docs-nav-title">Detection Types</div>
+                    <ul class="docs-nav-list">
                         <li class="docs-nav-item">
                             <a href="#motion-detection" class="docs-nav-link">
                                 <span class="docs-nav-icon">🎯</span>
                                 Motion Detection
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#face-detection" class="docs-nav-link">
+                                <span class="docs-nav-icon">📸</span>
+                                Face Detection
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
+                            <a href="#object-detection" class="docs-nav-link">
+                                <span class="docs-nav-icon">🔍</span>
+                                Object Detection
                             </a>
                         </li>
                     </ul>
@@ -897,8 +919,18 @@ chmod +x setup.sh && ./setup.sh</code></pre>
                             </tr>
                             <tr>
                                 <td>Motion</td>
-                                <td>🔴 Pulsing</td>
+                                <td>🔴 Pulsing Red</td>
                                 <td>Motion currently detected</td>
+                            </tr>
+                            <tr>
+                                <td>Face</td>
+                                <td>💜 Pulsing Purple</td>
+                                <td>Face currently detected</td>
+                            </tr>
+                            <tr>
+                                <td>Objects</td>
+                                <td>💙 Pulsing Cyan</td>
+                                <td>Objects currently detected</td>
                             </tr>
                         </tbody>
                     </table>
@@ -954,8 +986,10 @@ chmod +x setup.sh && ./setup.sh</code></pre>
                         <thead>
                             <tr>
                                 <th>Feature</th>
-                                <th>Basic Node</th>
-                                <th>Motion Node</th>
+                                <th>📷 Basic</th>
+                                <th>🎯 Motion</th>
+                                <th>📸 Face</th>
+                                <th>🔍 Object</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -963,39 +997,79 @@ chmod +x setup.sh && ./setup.sh</code></pre>
                                 <td>Live Streaming</td>
                                 <td>✅</td>
                                 <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
                             </tr>
                             <tr>
                                 <td>Motion Detection</td>
                                 <td>❌</td>
                                 <td>✅</td>
+                                <td>❌</td>
+                                <td>❌</td>
                             </tr>
                             <tr>
-                                <td>Motion Alerts</td>
+                                <td>Face Detection</td>
+                                <td>❌</td>
                                 <td>❌</td>
                                 <td>✅</td>
+                                <td>❌</td>
                             </tr>
                             <tr>
-                                <td>Motion History</td>
+                                <td>Object Detection</td>
                                 <td>❌</td>
-                                <td>✅</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>✅ (80+ classes)</td>
+                            </tr>
+                            <tr>
+                                <td>Detection Model</td>
+                                <td>—</td>
+                                <td>OpenCV</td>
+                                <td>ResNet-10 SSD</td>
+                                <td>YOLOv4 / YOLOv4-tiny</td>
                             </tr>
                             <tr>
                                 <td>CPU Usage</td>
                                 <td>~10-15%</td>
                                 <td>~20-30%</td>
+                                <td>~25-35%</td>
+                                <td>~40-80%</td>
                             </tr>
                             <tr>
                                 <td>Memory Usage</td>
                                 <td>~100MB</td>
                                 <td>~150MB</td>
+                                <td>~256MB</td>
+                                <td>~512MB-1.5GB</td>
                             </tr>
                             <tr>
                                 <td>Best For</td>
                                 <td>Simple monitoring</td>
-                                <td>Security alerts</td>
+                                <td>Movement alerts</td>
+                                <td>Person detection</td>
+                                <td>AI identification</td>
                             </tr>
                         </tbody>
                     </table>
+                    
+                    <h3>Node Type Details</h3>
+                    
+                    <h4>📷 Basic Node</h4>
+                    <p>Simple camera streaming without any detection. Lowest resource usage, ideal for basic monitoring.</p>
+                    
+                    <h4>🎯 Motion Detection Node</h4>
+                    <p>Detects movement using frame differencing. Great for security alerts when any motion occurs.</p>
+                    
+                    <h4>📸 Face Detection Node</h4>
+                    <p>Uses OpenCV DNN with ResNet-10 SSD model to detect human faces in real-time. Publishes events with confidence scores when faces are detected or leave the frame.</p>
+                    
+                    <h4>🔍 Object Detection Node</h4>
+                    <p>AI-powered detection using YOLOv4. Identifies 80+ object types including people, vehicles, animals, and household items. Choose between:</p>
+                    <ul>
+                        <li><strong>Full model:</strong> Best accuracy (~65% mAP), slower (~2-5 DPS), ~1.5GB RAM</li>
+                        <li><strong>Tiny model:</strong> Fast (~15-30 DPS), lower accuracy (~40% mAP), ~512MB RAM</li>
+                        <li><strong>Auto:</strong> Tries full first, falls back to tiny if insufficient memory</li>
+                    </ul>
                     
                     <h3>Configuration</h3>
                     <p>Camera nodes are configured via environment variables in the <code>.env</code> file:</p>
@@ -1137,6 +1211,209 @@ docker rm -f opensentry-node-&lt;camera-id&gt;</code></pre>
                         <li><strong>Toast Notifications:</strong> Pop-up alerts (configurable)</li>
                         <li><strong>Motion History:</strong> Last 100 events stored per camera</li>
                         <li><strong>History Button:</strong> Click to view recent motion events with timestamps</li>
+                    </ul>
+                </section>
+
+                <!-- Face Detection -->
+                <section id="face-detection" class="doc-section">
+                    <h2>📸 Face Detection</h2>
+                    <p>OpenSentry's Face Detection Node uses OpenCV DNN with a ResNet-10 SSD model for real-time face detection.</p>
+                    
+                    <h3>How It Works</h3>
+                    <ol>
+                        <li><strong>DNN Processing:</strong> Each frame is analyzed by the neural network</li>
+                        <li><strong>Face Detection:</strong> Identifies human faces with confidence scores</li>
+                        <li><strong>Event Publishing:</strong> Sends JSON events via MQTT when faces appear/disappear</li>
+                        <li><strong>Visual Feedback:</strong> Shows magenta bounding boxes around detected faces</li>
+                        <li><strong>Notifications:</strong> Triggers alerts in the dashboard</li>
+                    </ol>
+                    
+                    <h3>Face Event Format</h3>
+                    <p><strong>Face detected:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>{
+  "event": "face_detected",
+  "timestamp": 1705847293,
+  "count": 2,
+  "max_confidence": 0.95
+}</code></pre>
+                    </div>
+                    
+                    <p><strong>Face ended:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>{
+  "event": "face_end",
+  "timestamp": 1705847298,
+  "duration": 5
+}</code></pre>
+                    </div>
+                    
+                    <h3>Configuration</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Default</th>
+                                <th>Range</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>FACE_DETECTION_CONFIDENCE</td>
+                                <td>0.5</td>
+                                <td>0.1-1.0</td>
+                                <td>Lower = more sensitive, higher = stricter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Face Detection Features in Dashboard</h3>
+                    <ul>
+                        <li><strong>Real-time Alerts:</strong> Purple "FACE DETECTED" badge on video feed</li>
+                        <li><strong>Visual Effects:</strong> Camera card pulses with purple glow during detection</li>
+                        <li><strong>Toast Notifications:</strong> Pop-up alerts (configurable in Settings)</li>
+                        <li><strong>Face History:</strong> Last 100 events stored per camera</li>
+                        <li><strong>History Button:</strong> Click to view recent face events with timestamps</li>
+                    </ul>
+                </section>
+
+                <!-- Object Detection -->
+                <section id="object-detection" class="doc-section">
+                    <h2>🔍 Object Detection</h2>
+                    <p>OpenSentry's Object Detection Node uses YOLOv4 to identify 80+ object types in real-time.</p>
+                    
+                    <h3>Supported Objects (COCO 80 Classes)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Objects</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>People</td>
+                                <td>person</td>
+                            </tr>
+                            <tr>
+                                <td>Vehicles</td>
+                                <td>car, truck, bus, motorcycle, bicycle, boat, airplane, train</td>
+                            </tr>
+                            <tr>
+                                <td>Animals</td>
+                                <td>cat, dog, bird, horse, sheep, cow, elephant, bear, zebra, giraffe</td>
+                            </tr>
+                            <tr>
+                                <td>Household</td>
+                                <td>chair, couch, bed, dining table, toilet, tv, laptop, phone, refrigerator</td>
+                            </tr>
+                            <tr>
+                                <td>Outdoor</td>
+                                <td>traffic light, stop sign, parking meter, bench, fire hydrant</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Detection Models</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Input Size</th>
+                                <th>Accuracy</th>
+                                <th>Speed</th>
+                                <th>RAM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>full</strong> (YOLOv4)</td>
+                                <td>608x608</td>
+                                <td>~65% mAP</td>
+                                <td>~2-5 DPS</td>
+                                <td>~1.5GB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>tiny</strong> (YOLOv4-tiny)</td>
+                                <td>416x416</td>
+                                <td>~40% mAP</td>
+                                <td>~15-30 DPS</td>
+                                <td>~512MB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>auto</strong></td>
+                                <td>varies</td>
+                                <td>varies</td>
+                                <td>varies</td>
+                                <td>Tries full first</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><em>DPS = Detections Per Second (shown in video overlay)</em></p>
+                    
+                    <h3>Object Event Format</h3>
+                    <p><strong>Objects detected:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>{
+  "event": "objects_detected",
+  "objects": [
+    {"class": "person", "confidence": 85},
+    {"class": "dog", "confidence": 72}
+  ]
+}</code></pre>
+                    </div>
+                    
+                    <p><strong>Objects cleared:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>{
+  "event": "objects_cleared",
+  "objects": []
+}</code></pre>
+                    </div>
+                    
+                    <h3>Configuration</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>OBJECT_DETECTION_MODEL</td>
+                                <td>auto</td>
+                                <td>full, tiny, or auto</td>
+                            </tr>
+                            <tr>
+                                <td>OBJECT_DETECTION_CONFIDENCE</td>
+                                <td>0.20</td>
+                                <td>Detection threshold (0.1-1.0)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Object Detection Features in Dashboard</h3>
+                    <ul>
+                        <li><strong>Real-time Alerts:</strong> Cyan "OBJECTS" badge on video feed</li>
+                        <li><strong>Visual Effects:</strong> Camera card pulses with cyan glow during detection</li>
+                        <li><strong>Toast Notifications:</strong> Pop-up alerts (configurable in Settings)</li>
+                        <li><strong>Object History:</strong> Last 100 events stored per camera</li>
+                        <li><strong>History Button:</strong> Click to view recent object detections</li>
+                    </ul>
+                    
+                    <h3>Performance Tips</h3>
+                    <ul>
+                        <li>Use <code>tiny</code> model on Raspberry Pi 4 for better performance</li>
+                        <li>Use <code>full</code> model on desktop/server with 4GB+ RAM for best accuracy</li>
+                        <li>Lower confidence threshold (0.15-0.20) detects more objects but may have false positives</li>
+                        <li>Higher confidence threshold (0.40+) reduces false positives but may miss objects</li>
                     </ul>
                 </section>
 
@@ -1722,7 +1999,13 @@ avahi-browse -a</code></pre>
                     <p>Yes! Use Tailscale VPN for secure remote access. See the Remote Access section.</p>
                     
                     <h4>What's the difference between node types?</h4>
-                    <p>Basic nodes provide simple streaming. Motion nodes add intelligent motion detection with OpenCV.</p>
+                    <p>OpenSentry offers 4 node types:</p>
+                    <ul>
+                        <li><strong>Basic:</strong> Simple streaming, lowest resource usage</li>
+                        <li><strong>Motion:</strong> Streaming + motion detection alerts</li>
+                        <li><strong>Face Detection:</strong> Streaming + real-time face detection with confidence scores</li>
+                        <li><strong>Object Detection:</strong> Streaming + AI-powered detection of 80+ objects (people, vehicles, animals, etc.) using YOLOv4</li>
+                    </ul>
                     
                     <h4>How do I update OpenSentry?</h4>
                     <div class="code-block">
