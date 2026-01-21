@@ -747,11 +747,12 @@ cd OpenSentry-Command</code></pre>
                     </ol>
                     
                     <h3>Step 2: Set Up a Camera Node</h3>
+                    <p>Choose the node type that fits your needs:</p>
                     
                     <h4>Option A: Basic Camera Node</h4>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code># On your camera device (e.g., Raspberry Pi)
+                        <pre><code># Simple streaming camera
 git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git
 cd OpenSentry-Node
 chmod +x setup.sh && ./setup.sh</code></pre>
@@ -760,9 +761,27 @@ chmod +x setup.sh && ./setup.sh</code></pre>
                     <h4>Option B: Motion Detection Node</h4>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code># For cameras with motion detection
+                        <pre><code># Streaming + motion detection alerts
 git clone https://github.com/SourceBox-LLC/OpenSentry-MotionNode.git
 cd OpenSentry-MotionNode
+chmod +x setup.sh && ./setup.sh</code></pre>
+                    </div>
+                    
+                    <h4>Option C: Face Detection Node</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Streaming + real-time face detection
+git clone https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode.git
+cd OpenSentry-FaceDetectionNode
+chmod +x setup.sh && ./setup.sh</code></pre>
+                    </div>
+                    
+                    <h4>Option D: Object Detection Node</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Streaming + AI object detection (people, vehicles, animals, etc.)
+git clone https://github.com/SourceBox-LLC/OpenSentry-ObjectDetectionNode.git
+cd OpenSentry-ObjectDetectionNode
 chmod +x setup.sh && ./setup.sh</code></pre>
                     </div>
                     
@@ -1572,15 +1591,23 @@ sudo reboot</code></pre>
                     <h4>4. Install Camera Node</h4>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code># For basic node
+                        <pre><code># Basic node (streaming only)
 git clone https://github.com/SourceBox-LLC/OpenSentry-Node.git
 cd OpenSentry-Node
 
-# For motion detection
+# Motion detection node
 git clone https://github.com/SourceBox-LLC/OpenSentry-MotionNode.git
 cd OpenSentry-MotionNode
 
-# Run setup
+# Face detection node
+git clone https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode.git
+cd OpenSentry-FaceDetectionNode
+
+# Object detection node (YOLOv4)
+git clone https://github.com/SourceBox-LLC/OpenSentry-ObjectDetectionNode.git
+cd OpenSentry-ObjectDetectionNode
+
+# Run setup (for whichever node you chose)
 chmod +x setup.sh && ./setup.sh</code></pre>
                     </div>
                     
@@ -1737,6 +1764,8 @@ docker-compose up -d --build</code></pre>
                         <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Command" target="_blank">Command Center</a></li>
                         <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Node" target="_blank">Basic Node</a></li>
                         <li><a href="https://github.com/SourceBox-LLC/OpenSentry-MotionNode" target="_blank">Motion Node</a></li>
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode" target="_blank">Face Detection</a></li>
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-ObjectDetectionNode" target="_blank">Object Detection</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

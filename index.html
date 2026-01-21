@@ -273,6 +273,20 @@
                                 <span class="node-desc">Streaming + motion alerts</span>
                             </div>
                         </button>
+                        <button class="dropdown-item" data-node-type="face">
+                            <span class="node-icon">📸</span>
+                            <div class="node-info">
+                                <span class="node-name">Face Detection Node</span>
+                                <span class="node-desc">Streaming + face detection</span>
+                            </div>
+                        </button>
+                        <button class="dropdown-item" data-node-type="object">
+                            <span class="node-icon">🔍</span>
+                            <div class="node-info">
+                                <span class="node-name">Object Detection Node</span>
+                                <span class="node-desc">Streaming + AI object detection</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -384,6 +398,82 @@
                                 <div class="step-content">
                                     <h4>Motion detection ready</h4>
                                     <p class="step-note">Your motion-enabled camera will appear in the dashboard with a 🎯 indicator. Motion events trigger instant alerts!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Face Detection Node Instructions -->
+                    <div class="node-instructions" id="face-node-instructions" style="display: none;">
+                        <div class="node-header">
+                            <span class="node-badge face">📸 Face Detection Node</span>
+                            <p class="node-description">Real-time face detection using OpenCV DNN with high accuracy</p>
+                        </div>
+                        <div class="install-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Clone the repository</h4>
+                                    <div class="code-block">
+                                        <code>git clone https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode.git</code>
+                                        <button class="copy-btn" data-copy="git clone https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode.git">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Run the setup script</h4>
+                                    <div class="code-block">
+                                        <code>cd OpenSentry-FaceDetectionNode && chmod +x setup.sh && ./setup.sh</code>
+                                        <button class="copy-btn" data-copy="cd OpenSentry-FaceDetectionNode && chmod +x setup.sh && ./setup.sh">Copy</button>
+                                    </div>
+                                    <p class="step-note">Enter the Security Secret from your Command Center settings.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Face detection ready</h4>
+                                    <p class="step-note">Your camera will appear with a 📸 indicator. Face detection events are published via MQTT with confidence scores!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Object Detection Node Instructions -->
+                    <div class="node-instructions" id="object-node-instructions" style="display: none;">
+                        <div class="node-header">
+                            <span class="node-badge object">🔍 Object Detection Node</span>
+                            <p class="node-description">AI-powered detection of 80+ object types using YOLOv4</p>
+                        </div>
+                        <div class="install-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Clone the repository</h4>
+                                    <div class="code-block">
+                                        <code>git clone https://github.com/SourceBox-LLC/OpenSentry-ObjectDetectionNode.git</code>
+                                        <button class="copy-btn" data-copy="git clone https://github.com/SourceBox-LLC/OpenSentry-ObjectDetectionNode.git">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Run the setup script</h4>
+                                    <div class="code-block">
+                                        <code>cd OpenSentry-ObjectDetectionNode && chmod +x setup.sh && ./setup.sh</code>
+                                        <button class="copy-btn" data-copy="cd OpenSentry-ObjectDetectionNode && chmod +x setup.sh && ./setup.sh">Copy</button>
+                                    </div>
+                                    <p class="step-note">Choose model (auto/full/tiny) and enter the Security Secret.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Object detection ready</h4>
+                                    <p class="step-note">Your camera will appear with a 🔍 indicator. Detects people, vehicles, animals, and 80+ COCO classes!</p>
                                 </div>
                             </div>
                         </div>
@@ -542,12 +632,18 @@
                     <div class="footer-col">
                         <h5>Project</h5>
                         <a href="https://github.com/SourceBox-LLC/OpenSentry-Command" target="_blank">Command Center</a>
-                        <a href="https://github.com/SourceBox-LLC/OpenSentry-Node" target="_blank">Camera Node</a>
+                        <a href="https://github.com/SourceBox-LLC/OpenSentry-Node" target="_blank">Basic Node</a>
+                        <a href="https://github.com/SourceBox-LLC/OpenSentry-MotionNode" target="_blank">Motion Node</a>
+                    </div>
+                    <div class="footer-col">
+                        <h5>AI Nodes</h5>
+                        <a href="https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode" target="_blank">Face Detection</a>
+                        <a href="https://github.com/SourceBox-LLC/OpenSentry-ObjectDetectionNode" target="_blank">Object Detection</a>
                         <a href="https://github.com/SourceBox-LLC" target="_blank">SourceBox LLC</a>
                     </div>
                     <div class="footer-col">
                         <h5>Resources</h5>
-                        <a href="https://github.com/SourceBox-LLC/OpenSentry-Command#readme" target="_blank">Documentation</a>
+                        <a href="docs.html" target="_blank">Documentation</a>
                         <a href="https://github.com/SourceBox-LLC/OpenSentry-Command/issues" target="_blank">Report Issue</a>
                         <a href="https://github.com/SourceBox-LLC/OpenSentry-Command/blob/main/LICENSE" target="_blank">License</a>
                     </div>

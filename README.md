@@ -195,7 +195,10 @@ This website is created to showcase the OpenSentry projects, which are licensed 
 ## Links
 
 - **Command Center**: https://github.com/SourceBox-LLC/OpenSentry-Command
-- **Camera Node**: https://github.com/SourceBox-LLC/OpenSentry-Node
+- **Basic Node**: https://github.com/SourceBox-LLC/OpenSentry-Node
+- **Motion Node**: https://github.com/SourceBox-LLC/OpenSentry-MotionNode
+- **Face Detection Node**: https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode
+- **Object Detection Node**: https://github.com/SourceBox-LLC/OpenSentry-ObjectDetectionNode
 - **SourceBox LLC**: https://github.com/SourceBox-LLC
 
 ## Contributing
