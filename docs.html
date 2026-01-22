@@ -533,6 +533,12 @@
                     <div class="docs-nav-title">Advanced</div>
                     <ul class="docs-nav-list">
                         <li class="docs-nav-item">
+                            <a href="#ai-integration" class="docs-nav-link">
+                                <span class="docs-nav-icon">🤖</span>
+                                AI Integration
+                            </a>
+                        </li>
+                        <li class="docs-nav-item">
                             <a href="#api-reference" class="docs-nav-link">
                                 <span class="docs-nav-icon">🔌</span>
                                 API Reference
@@ -1809,6 +1815,106 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
                     <p>Generate a new security secret (admin only).</p>
                 </section>
 
+                <!-- AI Integration -->
+                <section id="ai-integration" class="doc-section">
+                    <h2>🤖 AI Integration</h2>
+                    <p>OpenSentry provides an MCP (Model Context Protocol) server for integrating with AI assistants like OpenCode and Claude Code.</p>
+                    
+                    <h3>MCP Server</h3>
+                    <p>The MCP server enables AI assistants to query camera status, detection alerts with location data, and system health through a standardized interface.</p>
+                    
+                    <h4>Features</h4>
+                    <ul>
+                        <li>List cameras and check status</li>
+                        <li>Query detection alerts with motion region/bounding box data</li>
+                        <li>Motion hotspot analysis (heatmap of detection locations)</li>
+                        <li>Activity timeline (detection patterns over time)</li>
+                        <li>Access recordings and snapshots</li>
+                        <li>Check system health and view settings</li>
+                    </ul>
+                    
+                    <h4>Installation</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>git clone https://github.com/SourceBox-LLC/OpenSentry-MCP.git
+cd OpenSentry-MCP
+./setup.sh</code></pre>
+                    </div>
+                    
+                    <h4>Configuration</h4>
+                    <p>Create a `.env` file or set environment variables:</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>OPENSENTRY_URL=https://localhost:5000
+OPENSENTRY_USERNAME=admin
+OPENSENTRY_PASSWORD=your_password</code></pre>
+                    </div>
+                    
+                    <h4>Available Tools</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>list_cameras()</code></td>
+                                <td>List all cameras and their status</td>
+                            </tr>
+                            <tr>
+                                <td><code>get_camera(camera_id)</code></td>
+                                <td>Get detailed info for a specific camera</td>
+                            </tr>
+                            <tr>
+                                <td><code>get_alerts(type, hours)</code></td>
+                                <td>Get detection alerts with region data</td>
+                            </tr>
+                            <tr>
+                                <td><code>get_motion_hotspots()</code></td>
+                                <td>Analyze motion detection heatmaps</td>
+                            </tr>
+                            <tr>
+                                <td><code>get_activity_timeline()</code></td>
+                                <td>Timeline of detection activity</td>
+                            </tr>
+                            <tr>
+                                <td><code>check_system_health()</code></td>
+                                <td>Check system health</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>OpenCode Configuration</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>{
+  "mcp": {
+    "opensentry": {
+      "type": "local",
+      "command": ["uv", "--directory", "/path/to/OpenSentry-MCP", "run", "python", "-m", "opensentry_mcp"],
+      "enabled": true,
+      "environment": {
+        "OPENSENTRY_URL": "https://localhost:5000",
+        "OPENSENTRY_USERNAME": "admin",
+        "OPENSENTRY_PASSWORD": "your_password"
+      }
+    }
+  }
+}</code></pre>
+                    </div>
+                    
+                    <h4>Example Queries</h4>
+                    <ul>
+                        <li>"What cameras do I have and which are online?"</li>
+                        <li>"Show me motion alerts from the last 24 hours"</li>
+                        <li>"Where in the frame was motion detected?"</li>
+                        <li>"Show me a heatmap of where motion is occurring"</li>
+                        <li>"What are the busiest times of day for activity?"</li>
+                    </ul>
+                </section>
+
                 <!-- MQTT Protocol -->
                 <section id="mqtt-protocol" class="doc-section">
                     <h2>📡 MQTT Protocol</h2>
@@ -2165,6 +2271,7 @@ docker-compose up -d --build</code></pre>
                     <ul class="footer-links">
                         <li><a href="#getting-started">Getting Started</a></li>
                         <li><a href="#motion-detection">Motion Detection</a></li>
+                        <li><a href="#ai-integration">AI Integration</a></li>
                         <li><a href="#api-reference">API Reference</a></li>
                         <li><a href="#troubleshooting">Troubleshooting</a></li>
                     </ul>
@@ -2173,6 +2280,7 @@ docker-compose up -d --build</code></pre>
                     <h4>Components</h4>
                     <ul class="footer-links">
                         <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Command" target="_blank">Command Center</a></li>
+                        <li><a href="https://github.com/SourceBox-LLC/OpenSentry-MCP" target="_blank">MCP Server</a></li>
                         <li><a href="https://github.com/SourceBox-LLC/OpenSentry-Node" target="_blank">Basic Node</a></li>
                         <li><a href="https://github.com/SourceBox-LLC/OpenSentry-MotionNode" target="_blank">Motion Node</a></li>
                         <li><a href="https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode" target="_blank">Face Detection</a></li>

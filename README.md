@@ -195,6 +195,7 @@ This website is created to showcase the OpenSentry projects, which are licensed 
 ## Links
 
 - **Command Center**: https://github.com/SourceBox-LLC/OpenSentry-Command
+- **MCP Server**: https://github.com/SourceBox-LLC/OpenSentry-MCP
 - **Basic Node**: https://github.com/SourceBox-LLC/OpenSentry-Node
 - **Motion Node**: https://github.com/SourceBox-LLC/OpenSentry-MotionNode
 - **Face Detection Node**: https://github.com/SourceBox-LLC/OpenSentry-FaceDetectionNode
