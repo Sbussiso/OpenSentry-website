@@ -44,24 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // MCP Server tab
-    const mcpBtn = document.querySelector('.tab-btn[data-tab="mcp"]');
-    if (mcpBtn) {
-        mcpBtn.addEventListener('click', function() {
-            // Remove active from node dropdown
-            dropdownToggle.classList.remove('active');
-            nodeDropdown.classList.remove('open');
-            commandBtn.classList.remove('active');
-            
-            // Add active to MCP button
-            this.classList.add('active');
-            
-            // Show MCP panel
-            tabPanels.forEach(p => p.classList.remove('active'));
-            document.getElementById('mcp-panel').classList.add('active');
-        });
-    }
-    
     // Node dropdown toggle
     if (dropdownToggle) {
         dropdownToggle.addEventListener('click', function(e) {
