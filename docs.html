@@ -404,9 +404,9 @@
                     <h3>📹 Camera Nodes</h3>
                     <p>Compare Basic, Motion, Face, and Object Detection nodes</p>
                 </a>
-                <a href="#object-detection" class="quick-link">
-                    <h3>🔍 AI Detection</h3>
-                    <p>YOLOv4-powered object detection for 80+ classes</p>
+                <a href="#recording" class="quick-link">
+                    <h3>🎬 Recording</h3>
+                    <p>Manual, auto, and 24/7 video recording modes</p>
                 </a>
                 <a href="#api-reference" class="quick-link">
                     <h3>🔌 API Reference</h3>
@@ -520,6 +520,12 @@
                                 Notifications
                             </a>
                         </li>
+                        <li class="docs-nav-item">
+                            <a href="#recording" class="docs-nav-link">
+                                <span class="docs-nav-icon">🎬</span>
+                                Recording
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -607,12 +613,20 @@ chmod +x setup.sh && ./setup.sh
                             <p>HTTPS, RTSPS, and MQTTS protocols</p>
                         </div>
                         <div class="feature-card">
-                            <h4>🎯 Motion Detection</h4>
-                            <p>Real-time alerts with OpenCV</p>
+                            <h4>🎯 Smart Detection</h4>
+                            <p>Motion, face, and object detection with alerts</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🎬 Video Recording</h4>
+                            <p>Manual, auto, and 24/7 recording modes</p>
                         </div>
                         <div class="feature-card">
                             <h4>📱 Multi-User</h4>
                             <p>Admin and viewer roles</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>📁 Media Library</h4>
+                            <p>Browse, play, and download recordings</p>
                         </div>
                     </div>
                 </section>
@@ -1627,6 +1641,114 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
                     </div>
                 </section>
 
+                <!-- Recording -->
+                <section id="recording" class="doc-section">
+                    <h2>🎬 Recording</h2>
+                    <p>OpenSentry supports both manual and automatic video recording from all camera types.</p>
+                    
+                    <h3>Recording Methods</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>📷 Manual Recording</h4>
+                            <p>Click the Record button on any camera to start/stop recording on demand.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🤖 Auto-Recording</h4>
+                            <p>Automatically record when motion, faces, or objects are detected.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🔴 24/7 Recording</h4>
+                            <p>Continuous recording from all cameras with a single toggle.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Auto-Recording Configuration</h3>
+                    <p>Configure automatic recording in Settings → Recording:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Setting</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Record on Motion Detection</strong></td>
+                                <td>Automatically start recording when motion is detected</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Record on Face Detection</strong></td>
+                                <td>Automatically start recording when a face is detected</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Record on Object Detection</strong></td>
+                                <td>Automatically start recording when objects are detected</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Post-Detection Buffer</strong></td>
+                                <td>Continue recording for 1-30 seconds after detection ends (default: 5s)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>24/7 Continuous Recording</h3>
+                    <p>Enable 24/7 recording for complete surveillance coverage:</p>
+                    <ul>
+                        <li><strong>Master Toggle:</strong> Overrides all individual auto-recording settings</li>
+                        <li><strong>All Cameras:</strong> Records from every connected camera simultaneously</li>
+                        <li><strong>Simple Control:</strong> One toggle to start/stop all recording</li>
+                    </ul>
+                    
+                    <div class="alert alert-warning">
+                        <strong>Storage Consideration:</strong> 24/7 recording generates significant storage. Ensure adequate disk space for continuous recording.
+                    </div>
+                    
+                    <h3>Media Library</h3>
+                    <p>Access saved recordings from the Media Library:</p>
+                    <ol>
+                        <li>Click the 📁 Media Library icon (top right)</li>
+                        <li>Switch between Snapshots and Recordings tabs</li>
+                        <li>Click Play to watch in browser</li>
+                        <li>Click Download to save locally</li>
+                    </ol>
+                    
+                    <h3>Video Format</h3>
+                    <p>All recordings are transcoded to H.264 format for browser compatibility:</p>
+                    <ul>
+                        <li><strong>Format:</strong> MP4 with H.264 video codec</li>
+                        <li><strong>Storage:</strong> Encrypted binary blobs in SQLite database</li>
+                        <li><strong>Playback:</strong> Direct browser playback or download</li>
+                    </ul>
+                    
+                    <h3>Recording Controls</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Control</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🔴 REC Badge</td>
+                                <td>Appears on camera feed when recording</td>
+                            </tr>
+                            <tr>
+                                <td>⏱️ Timer</td>
+                                <td>Shows elapsed recording time</td>
+                            </tr>
+                            <tr>
+                                <td>🎬 Record Button</td>
+                                <td>Start/stop manual recording</td>
+                            </tr>
+                            <tr>
+                                <td>📸 Snapshot Button</td>
+                                <td>Capture and save a snapshot</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
                 <!-- API Reference -->
                 <section id="api-reference" class="doc-section">
                     <h2>🔌 API Reference</h2>
@@ -1990,7 +2112,13 @@ avahi-browse -a</code></pre>
                     <p>Yes! All video streams use RTSPS (RTSP over TLS) encryption.</p>
                     
                     <h4>Can I record video?</h4>
-                    <p>Recording features are coming soon. Currently, you can view live streams and motion events.</p>
+                    <p>Yes! OpenSentry supports multiple recording modes:</p>
+                    <ul>
+                        <li><strong>Manual:</strong> Click Record button to start/stop</li>
+                        <li><strong>Auto-Recording:</strong> Record on motion, face, or object detection</li>
+                        <li><strong>24/7:</strong> Continuous recording from all cameras</li>
+                    </ul>
+                    <p>All recordings are stored in the encrypted database and playable in the browser.</p>
                     
                     <h4>Does it work on Windows?</h4>
                     <p>Yes, using WSL2 (Windows Subsystem for Linux). See the installation guide for details.</p>
